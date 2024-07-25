@@ -1,0 +1,65 @@
+{
+    "NpcController": {
+        "checkpoints": [
+            {
+                "steps": 499941,
+                "file_path": "results\\NPCTraining\\NpcController\\NpcController-499941.onnx",
+                "reward": null,
+                "creation_time": 1721897843.543659,
+                "auxillary_file_paths": [
+                    "results\\NPCTraining\\NpcController\\NpcController-499941.pt"
+                ]
+            },
+            {
+                "steps": 999983,
+                "file_path": "results\\NPCTraining\\NpcController\\NpcController-999983.onnx",
+                "reward": null,
+                "creation_time": 1721898142.4764051,
+                "auxillary_file_paths": [
+                    "results\\NPCTraining\\NpcController\\NpcController-999983.pt"
+                ]
+            },
+            {
+                "steps": 1499980,
+                "file_path": "results\\NPCTraining\\NpcController\\NpcController-1499980.onnx",
+                "reward": null,
+                "creation_time": 1721898440.3733516,
+                "auxillary_file_paths": [
+                    "results\\NPCTraining\\NpcController\\NpcController-1499980.pt"
+                ]
+            },
+            {
+                "steps": 1999937,
+                "file_path": "results\\NPCTraining\\NpcController\\NpcController-1999937.onnx",
+                "reward": null,
+                "creation_time": 1721898736.6223977,
+                "auxillary_file_paths": [
+                    "results\\NPCTraining\\NpcController\\NpcController-1999937.pt"
+                ]
+            },
+            {
+                "steps": 2000065,
+                "file_path": "results\\NPCTraining\\NpcController\\NpcController-2000065.onnx",
+                "reward": null,
+                "creation_time": 1721898736.6847646,
+                "auxillary_file_paths": [
+                    "results\\NPCTraining\\NpcController\\NpcController-2000065.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2000065,
+            "file_path": "results\\NPCTraining\\NpcController.onnx",
+            "reward": null,
+            "creation_time": 1721898736.6847646,
+            "auxillary_file_paths": [
+                "results\\NPCTraining\\NpcController\\NpcController-2000065.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0.dev0",
+        "torch_version": "2.3.1+cu121"
+    }
+}
