@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1961419697864802016}
   m_Layer: 0
   m_Name: P_Prizes
-  m_TagString: Untagged
+  m_TagString: Fun
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,10 +87,39 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 02d9a3767e5e23e4380691a81e2cfcbc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8481950773325746319}
   m_SourcePrefab: {fileID: 100100000, guid: 02d9a3767e5e23e4380691a81e2cfcbc, type: 3}
 --- !u!4 &5803196975189696233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 02d9a3767e5e23e4380691a81e2cfcbc, type: 3}
   m_PrefabInstance: {fileID: 6270032795560638722}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6612067424722076755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 02d9a3767e5e23e4380691a81e2cfcbc, type: 3}
+  m_PrefabInstance: {fileID: 6270032795560638722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8481950773325746319
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6612067424722076755}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1999999, y: 1.2, z: 0.59999996}
+  m_Center: {x: 0, y: 0.6, z: 0}
