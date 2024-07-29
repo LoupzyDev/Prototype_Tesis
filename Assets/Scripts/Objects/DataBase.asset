@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c78f25e67ec6f44a2b264ffa759e90, type: 3}
+  m_Name: DataBase
+  m_EditorClassIdentifier: 
+  objectsData:
+  - <Name>k__BackingField: ArcadeMachine
+    <ID>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5237576275740120950, guid: d84256c4ae2df2048b222ffc71dbc1ba, type: 3}
+  - <Name>k__BackingField: BasquetBallGame
+    <ID>k__BackingField: 1
+    <Size>k__BackingField: {x: 1, y: 2}
+    <Prefab>k__BackingField: {fileID: 1816944350554106125, guid: 780933818b071734aa284a9551f98993, type: 3}
+  - <Name>k__BackingField: Prizes
+    <ID>k__BackingField: 2
+    <Size>k__BackingField: {x: 2, y: 1}
+    <Prefab>k__BackingField: {fileID: 4717594706695113732, guid: b4ec9ffde0a0d944ebceb00771c1113b, type: 3}
+  - <Name>k__BackingField: VendingMachine
+    <ID>k__BackingField: 3
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7070035941337308562, guid: 2a431ba9e1243cd4ea670911b44e46fd, type: 3}
