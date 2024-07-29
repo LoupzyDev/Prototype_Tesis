@@ -102,6 +102,16 @@ public class PreviewSystem : MonoBehaviour
             position.y + previewYOffset, 
             position.z);
     }
+    public void RotatePreview(bool clockwise) {
+        if (previewObject != null) {
+            Transform childTransform = previewObject.transform.GetChild(0); // Obtén el primer hijo del prefab
+            if (childTransform != null) {
+                float rotationAngle = clockwise ? 180f : -180f;
+                childTransform.Rotate(Vector3.up, rotationAngle, Space.World);
+            }
+        }
+    }
+
     public void UpdateCursorSize(int sizeX, int sizeY) {
         cellIndicator.transform.localScale = new Vector3(sizeX, 1, sizeY);
         cellIndicatorRenderer.material.mainTextureScale = new Vector2(sizeX, sizeY);

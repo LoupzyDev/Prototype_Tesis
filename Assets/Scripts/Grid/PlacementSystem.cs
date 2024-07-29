@@ -105,21 +105,17 @@ public class PlacementSystem : MonoBehaviour
             lastDetectedPosition = gridPosition;
         }
 
-        // Maneja la rotación del objeto
         if (Input.GetKeyDown(KeyCode.Q)) {
-            
             if (buildingState is PlacementState placementState) {
                 placementState.RotateFuture();
-                //placementState.RotateObject(false); // Rotar en sentido antihorario
             }
         }
         if (Input.GetKeyDown(KeyCode.E)) {
-
             if (buildingState is PlacementState placementState) {
                 placementState.RotateFuture();
-                //placementState.RotateObject(true); // Rotar en sentido horario
             }
         }
     }
+
 
 }

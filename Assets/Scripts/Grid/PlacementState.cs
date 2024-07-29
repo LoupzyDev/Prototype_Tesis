@@ -84,31 +84,31 @@ public class PlacementState : IBuildingState {
     public void RotateFuture() {
         GameObject prefab = database.objectsData[selectedObjectIndex].Prefab;
 
-
         Transform firstChild = prefab.transform.GetChild(0);
-
 
         if (Quaternion.Angle(firstChild.rotation, Quaternion.Euler(0, 0, 0)) < 0.01f) {
             firstChild.rotation = Quaternion.Euler(0, 180, 0);
+            previewSystem.RotatePreview(true); // Rotar en sentido horario
         } else {
-
             firstChild.rotation = Quaternion.Euler(0, 0, 0);
-        }   
+            previewSystem.RotatePreview(false); // Rotar en sentido antihorario
+        }
     }
 
-    private void UpdateObjectSize() {   
+
+    private void UpdateObjectSize() {
         var objectData = database.objectsData[selectedObjectIndex];
         int newSizeX = objectData.Size.x;
         int newSizeY = objectData.Size.y;
 
-        // Ajustar tamaño según la rotación
         if (rotationIndex % 2 == 1) // Rotación 90 o 270 grados
         {
             (newSizeX, newSizeY) = (newSizeY, newSizeX);
         }
 
-        // Actualiza el tamaño en la base de datos
         objectData.Size = new Vector2Int(newSizeX, newSizeY);
         previewSystem.UpdateCursorSize(newSizeX, newSizeY);
+        previewSystem.RotatePreview(rotationIndex % 2 == 1); // Aplicar rotación
     }
+
 }
