@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
 
-public class PlacementState : IBuildingState
-{
+public class PlacementState : IBuildingState {
     private int selectedObjectIndex = -1;
     int ID;
     Grid grid;
@@ -13,7 +12,7 @@ public class PlacementState : IBuildingState
     GridData floorData;
     GridData furnitureData;
     ObjectPlacer objectPlacer;
-    //SoundFeedback soundFeedback;
+
 
     public PlacementState(int iD,
                           Grid grid,
@@ -21,9 +20,7 @@ public class PlacementState : IBuildingState
                           ObjectsDatabaseSO database,
                           GridData floorData,
                           GridData furnitureData,
-                          ObjectPlacer objectPlacer)
-                          //SoundFeedback soundFeedback)
-    {
+                          ObjectPlacer objectPlacer) {
         ID = iD;
         this.grid = grid;
         this.previewSystem = previewSystem;
@@ -31,37 +28,31 @@ public class PlacementState : IBuildingState
         this.floorData = floorData;
         this.furnitureData = furnitureData;
         this.objectPlacer = objectPlacer;
-        //this.soundFeedback = soundFeedback;
+
 
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
-        if (selectedObjectIndex > -1)
-        {
+        if (selectedObjectIndex > -1) {
             previewSystem.StartShowingPlacementPreview(
                 database.objectsData[selectedObjectIndex].Prefab,
                 database.objectsData[selectedObjectIndex].Size);
-        }
-        else
+        } else
             throw new System.Exception($"No object with ID {iD}");
-        
+
     }
 
-    public void EndState()
-    {
+    public void EndState() {
         previewSystem.StopShowingPreview();
     }
 
-    public void OnAction(Vector3Int gridPosition)
-    {
-
+    public void OnAction(Vector3Int gridPosition, float rotation) {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
-        if (placementValidity == false)
-        {
-            //soundFeedback.PlaySound(SoundType.wrongPlacement);
+        if (placementValidity == false) {
             return;
         }
-        //soundFeedback.PlaySound(SoundType.Place);
+
         int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab,
-            grid.CellToWorld(gridPosition));
+            grid.CellToWorld(gridPosition),
+            rotation);
 
         GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ?
             furnitureData ://floorData :
@@ -74,8 +65,7 @@ public class PlacementState : IBuildingState
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false);
     }
 
-    private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
-    {
+    private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex) {
         GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ?
             furnitureData : //floorData :
             furnitureData;
@@ -83,11 +73,9 @@ public class PlacementState : IBuildingState
         return selectedData.CanPlaceObejctAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
     }
 
-    public void UpdateState(Vector3Int gridPosition)
-    {
+    public void UpdateState(Vector3Int gridPosition) {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
 
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity);
     }
 }
-
