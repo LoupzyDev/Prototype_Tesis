@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static Unity.VisualScripting.Member;
 
-public class PlacementState : IBuildingState
-{
+public class PlacementState : IBuildingState {
     private int selectedObjectIndex = -1;
+    private int rotationIndex = 0; // Agregado para manejar la rotación
     int ID;
     Grid grid;
     PreviewSystem previewSystem;
@@ -14,16 +11,13 @@ public class PlacementState : IBuildingState
     GridData furnitureData;
     ObjectPlacer objectPlacer;
 
-
     public PlacementState(int iD,
                           Grid grid,
                           PreviewSystem previewSystem,
                           ObjectsDatabaseSO database,
                           GridData floorData,
                           GridData furnitureData,
-                          ObjectPlacer objectPlacer)
-
-    {
+                          ObjectPlacer objectPlacer) {
         ID = iD;
         this.grid = grid;
         this.previewSystem = previewSystem;
@@ -32,31 +26,22 @@ public class PlacementState : IBuildingState
         this.furnitureData = furnitureData;
         this.objectPlacer = objectPlacer;
 
-
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
-        if (selectedObjectIndex > -1)
-        {
+        if (selectedObjectIndex > -1) {
             previewSystem.StartShowingPlacementPreview(
                 database.objectsData[selectedObjectIndex].Prefab,
                 database.objectsData[selectedObjectIndex].Size);
-        }
-        else
+        } else
             throw new System.Exception($"No object with ID {iD}");
-        
     }
 
-    public void EndState()
-    {
+    public void EndState() {
         previewSystem.StopShowingPreview();
     }
 
-    public void OnAction(Vector3Int gridPosition)
-    {
-
+    public void OnAction(Vector3Int gridPosition) {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
-        if (placementValidity == false)
-        {
-
+        if (placementValidity == false) {
             return;
         }
 
@@ -64,7 +49,7 @@ public class PlacementState : IBuildingState
             grid.CellToWorld(gridPosition));
 
         GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ?
-            furnitureData ://floorData :
+            furnitureData :
             furnitureData;
         selectedData.AddObjectAt(gridPosition,
             database.objectsData[selectedObjectIndex].Size,
@@ -74,20 +59,42 @@ public class PlacementState : IBuildingState
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false);
     }
 
-    private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
-    {
+    private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex) {
         GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ?
-            furnitureData : 
+            furnitureData :
             furnitureData;
 
         return selectedData.CanPlaceObejctAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
     }
 
-    public void UpdateState(Vector3Int gridPosition)
-    {
+    public void UpdateState(Vector3Int gridPosition) {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
-
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity);
     }
-}
 
+    public void RotateObject(bool clockwise) {
+        if (clockwise) {
+            rotationIndex = (rotationIndex + 1) % 4;
+        } else {
+            rotationIndex = (rotationIndex - 1 + 4) % 4;
+        }
+
+        UpdateObjectSize();
+    }
+
+    private void UpdateObjectSize() {   
+        var objectData = database.objectsData[selectedObjectIndex];
+        int newSizeX = objectData.Size.x;
+        int newSizeY = objectData.Size.y;
+
+        // Ajustar tamaño según la rotación
+        if (rotationIndex % 2 == 1) // Rotación 90 o 270 grados
+        {
+            (newSizeX, newSizeY) = (newSizeY, newSizeX);
+        }
+
+        // Actualiza el tamaño en la base de datos
+        objectData.Size = new Vector2Int(newSizeX, newSizeY);
+        previewSystem.UpdateCursorSize(newSizeX, newSizeY);
+    }
+}

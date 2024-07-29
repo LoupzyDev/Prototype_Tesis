@@ -93,17 +93,29 @@ public class PlacementSystem : MonoBehaviour
         buildingState = null;
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (buildingState == null)
             return;
+
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-        if(lastDetectedPosition != gridPosition)
-        {
+
+        if (lastDetectedPosition != gridPosition) {
             buildingState.UpdateState(gridPosition);
             lastDetectedPosition = gridPosition;
         }
-        
+
+        // Maneja la rotación del objeto
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            if (buildingState is PlacementState placementState) {
+                placementState.RotateObject(false); // Rotar en sentido antihorario
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if (buildingState is PlacementState placementState) {
+                placementState.RotateObject(true); // Rotar en sentido horario
+            }
+        }
     }
+
 }

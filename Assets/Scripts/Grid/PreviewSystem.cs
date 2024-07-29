@@ -102,6 +102,10 @@ public class PreviewSystem : MonoBehaviour
             position.y + previewYOffset, 
             position.z);
     }
+    public void UpdateCursorSize(int sizeX, int sizeY) {
+        cellIndicator.transform.localScale = new Vector3(sizeX, 1, sizeY);
+        cellIndicatorRenderer.material.mainTextureScale = new Vector2(sizeX, sizeY);
+    }
 
     internal void StartShowingRemovePreview()
     {
