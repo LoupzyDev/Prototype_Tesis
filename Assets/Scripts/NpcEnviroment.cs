@@ -5,7 +5,7 @@ using UnityEngine;
 public class NpcEnviroment : MonoBehaviour {
     public float happiness = 10f;
     public float sadness = 10f;
-    private float checkInterval = 0.5f; // Intervalo en segundos para chequear la escena
+    private float checkInterval = 0.5f; 
     private int workCount = 0;
     private int funCount = 0;
     private float workMultiplier = 1f;
@@ -20,7 +20,7 @@ public class NpcEnviroment : MonoBehaviour {
             UpdateCounts();
             UpdateMultipliers();
 
-            // Actualizar felicidad y tristeza según los contadores y multiplicadores
+
             happiness -= workCount * workMultiplier;
             sadness += workCount * workMultiplier;
             happiness += funCount * funMultiplier;
