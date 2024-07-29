@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlacementSystem : MonoBehaviour {
+public class PlacementSystem : MonoBehaviour
+{
     [SerializeField]
     private InputManager inputManager;
     [SerializeField]
@@ -18,7 +19,7 @@ public class PlacementSystem : MonoBehaviour {
 
     [SerializeField]
     private AudioClip correctPlacementClip, wrongPlacementClip;
-
+    //[SerializeField] private AudioSource source;
 
     private GridData floorData, furnitureData;
 
@@ -31,16 +32,18 @@ public class PlacementSystem : MonoBehaviour {
     private ObjectPlacer objectPlacer;
 
     IBuildingState buildingState;
-    private float currentRotation = 0f;
 
+    //[SerializeField] private SoundFeedback soundFeedback;
 
-    private void Start() {
+    private void Start()
+    {
         gridVisualization.SetActive(false);
         floorData = new();
         furnitureData = new();
     }
 
-    public void StartPlacement(int ID) {
+    public void StartPlacement(int ID)
+    {
         StopPlacement();
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(ID,
@@ -50,30 +53,45 @@ public class PlacementSystem : MonoBehaviour {
                                            floorData,
                                            furnitureData,
                                            objectPlacer);
-
+                                           //soundFeedback);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
 
-    public void StartRemoving() {
+    public void StartRemoving()
+    {
         StopPlacement();
-        gridVisualization.SetActive(true);
-        buildingState = new RemovingState(grid, preview, floorData, furnitureData, objectPlacer);
+        gridVisualization.SetActive(true) ;
+        buildingState = new RemovingState(grid, preview, floorData, furnitureData, objectPlacer); //soundFeedback);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
 
-    private void PlaceStructure() {
-        if (inputManager.IsPointerOverUI()) {
+    private void PlaceStructure()
+    {
+        if(inputManager.IsPointerOverUI())
+        {
             return;
         }
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
-        buildingState.OnAction(gridPosition, currentRotation);
+        buildingState.OnAction(gridPosition);
+
     }
 
-    private void StopPlacement() {
+    //private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
+    //{
+    //    GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ? 
+    //        floorData : 
+    //        furnitureData;
+
+    //    return selectedData.CanPlaceObejctAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
+    //}
+
+    private void StopPlacement()
+    {
+        //soundFeedback.PlaySound(SoundType.Click);
         if (buildingState == null)
             return;
         gridVisualization.SetActive(false);
@@ -84,24 +102,17 @@ public class PlacementSystem : MonoBehaviour {
         buildingState = null;
     }
 
-    private void Update() {
+    private void Update()
+    {
         if (buildingState == null)
             return;
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-        if (lastDetectedPosition != gridPosition) {
+        if(lastDetectedPosition != gridPosition)
+        {
             buildingState.UpdateState(gridPosition);
             lastDetectedPosition = gridPosition;
         }
-
-        // Rotación del objeto con Q y E
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            currentRotation -= 90f;
-            preview.UpdateRotation(currentRotation);
-        }
-        if (Input.GetKeyDown(KeyCode.E)) {
-            currentRotation += 90f;
-            preview.UpdateRotation(currentRotation);
-        }
+        
     }
 }
