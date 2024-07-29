@@ -17,9 +17,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject gridVisualization;
 
-    [SerializeField]
-    private AudioClip correctPlacementClip, wrongPlacementClip;
-    //[SerializeField] private AudioSource source;
+
 
     private GridData floorData, furnitureData;
 
@@ -33,7 +31,7 @@ public class PlacementSystem : MonoBehaviour
 
     IBuildingState buildingState;
 
-    //[SerializeField] private SoundFeedback soundFeedback;
+
 
     private void Start()
     {
@@ -53,7 +51,7 @@ public class PlacementSystem : MonoBehaviour
                                            floorData,
                                            furnitureData,
                                            objectPlacer);
-                                           //soundFeedback);
+
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
@@ -62,7 +60,7 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         gridVisualization.SetActive(true) ;
-        buildingState = new RemovingState(grid, preview, floorData, furnitureData, objectPlacer); //soundFeedback);
+        buildingState = new RemovingState(grid, preview, floorData, furnitureData, objectPlacer); 
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
@@ -80,18 +78,11 @@ public class PlacementSystem : MonoBehaviour
 
     }
 
-    //private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
-    //{
-    //    GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ? 
-    //        floorData : 
-    //        furnitureData;
 
-    //    return selectedData.CanPlaceObejctAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
-    //}
 
     private void StopPlacement()
     {
-        //soundFeedback.PlaySound(SoundType.Click);
+
         if (buildingState == null)
             return;
         gridVisualization.SetActive(false);
