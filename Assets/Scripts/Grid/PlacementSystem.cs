@@ -107,13 +107,17 @@ public class PlacementSystem : MonoBehaviour
 
         // Maneja la rotación del objeto
         if (Input.GetKeyDown(KeyCode.Q)) {
+            
             if (buildingState is PlacementState placementState) {
-                placementState.RotateObject(false); // Rotar en sentido antihorario
+                placementState.RotateFuture();
+                //placementState.RotateObject(false); // Rotar en sentido antihorario
             }
         }
         if (Input.GetKeyDown(KeyCode.E)) {
+
             if (buildingState is PlacementState placementState) {
-                placementState.RotateObject(true); // Rotar en sentido horario
+                placementState.RotateFuture();
+                //placementState.RotateObject(true); // Rotar en sentido horario
             }
         }
     }

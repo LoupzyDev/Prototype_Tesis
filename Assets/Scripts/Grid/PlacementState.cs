@@ -81,6 +81,20 @@ public class PlacementState : IBuildingState {
 
         UpdateObjectSize();
     }
+    public void RotateFuture() {
+        GameObject prefab = database.objectsData[selectedObjectIndex].Prefab;
+
+
+        Transform firstChild = prefab.transform.GetChild(0);
+
+
+        if (Quaternion.Angle(firstChild.rotation, Quaternion.Euler(0, 0, 0)) < 0.01f) {
+            firstChild.rotation = Quaternion.Euler(0, 180, 0);
+        } else {
+
+            firstChild.rotation = Quaternion.Euler(0, 0, 0);
+        }   
+    }
 
     private void UpdateObjectSize() {   
         var objectData = database.objectsData[selectedObjectIndex];
