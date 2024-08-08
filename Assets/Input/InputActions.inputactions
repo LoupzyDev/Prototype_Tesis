@@ -48,7 +48,7 @@
                 {
                     "name": "",
                     "id": "025e55b3-1b07-4e32-bef9-4c2cd5a9a1fa",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

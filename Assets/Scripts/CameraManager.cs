@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using System.Collections.Generic;
 
 public class CameraManager : MonoBehaviour {
     #region Variables
@@ -15,6 +16,8 @@ public class CameraManager : MonoBehaviour {
 
     [SerializeField] private float movementSpeed = 10.0f;
     [SerializeField] private float rotationSpeed = 0.5f;
+
+    [SerializeField] private List<GameObject> _walls;
 
     #endregion
 
@@ -52,6 +55,32 @@ public class CameraManager : MonoBehaviour {
             transform.Rotate(new Vector3(_xRotation, -_delta.x * rotationSpeed, 0.0f));
             transform.rotation = Quaternion.Euler(_xRotation, transform.rotation.eulerAngles.y, 0.0f);
         }
+
+        if(transform.rotation.eulerAngles.y == 45.0f) {
+            _walls[0].SetActive(false);
+            _walls[1].SetActive(false);
+            _walls[2].SetActive(true);
+            _walls[3].SetActive(true);
+        }
+        if (transform.rotation.eulerAngles.y == 315.0f) {
+            _walls[0].SetActive(true);
+            _walls[1].SetActive(false);
+            _walls[2].SetActive(false);
+            _walls[3].SetActive(true);
+        }
+        if (transform.rotation.eulerAngles.y == 225.0f) {
+            _walls[0].SetActive(true);
+            _walls[1].SetActive(true);
+            _walls[2].SetActive(false);
+            _walls[3].SetActive(false);
+        }
+        if (transform.rotation.eulerAngles.y == 135.0f) {
+            _walls[0].SetActive(false);
+            _walls[1].SetActive(true);
+            _walls[2].SetActive(true);
+            _walls[3].SetActive(false);
+        }
+
     }
 
     private void SnapRotation() {
