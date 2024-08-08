@@ -17,7 +17,8 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject gridVisualization;
 
-
+    [SerializeField]
+    private List<Vector3Int> tilesToBlock;
 
     private GridData floorData, furnitureData;
 
@@ -38,6 +39,12 @@ public class PlacementSystem : MonoBehaviour
         gridVisualization.SetActive(false);
         floorData = new();
         furnitureData = new();
+
+
+        // Bloquear todos los tiles en la lista
+        foreach (var tilePosition in tilesToBlock) {
+            BlockTile(tilePosition);
+        }
     }
 
     public void StartPlacement(int ID)
@@ -91,6 +98,10 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnExit -= StopPlacement;
         lastDetectedPosition = Vector3Int.zero;
         buildingState = null;
+    }
+    public void BlockTile(Vector3Int gridPosition) {
+        floorData.BlockTile(gridPosition);
+        furnitureData.BlockTile(gridPosition);
     }
 
     private void Update() {

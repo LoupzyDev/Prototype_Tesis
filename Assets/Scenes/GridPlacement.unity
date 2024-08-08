@@ -3173,6 +3173,11 @@ MonoBehaviour:
   grid: {fileID: 400407699}
   database: {fileID: 11400000, guid: fd2025d287d376c489d1eed5ee779001, type: 2}
   gridVisualization: {fileID: 755973898}
+  tilesToBlock:
+  - {x: 0, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: -1, y: 0, z: -1}
+  - {x: 0, y: 0, z: -1}
   preview: {fileID: 259864822}
   objectPlacer: {fileID: 755865260}
 --- !u!1 &1656825614

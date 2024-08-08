@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlacementState : IBuildingState {
     private int selectedObjectIndex = -1;
-    private int rotationIndex = 0; // Agregado para manejar la rotación
+    private int rotationIndex = 0; 
     int ID;
     Grid grid;
     PreviewSystem previewSystem;
@@ -64,8 +64,9 @@ public class PlacementState : IBuildingState {
             furnitureData :
             furnitureData;
 
-        return selectedData.CanPlaceObejctAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
+        return selectedData.CanPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
     }
+
 
     public void UpdateState(Vector3Int gridPosition) {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
