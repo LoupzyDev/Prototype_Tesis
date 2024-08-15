@@ -47,7 +47,6 @@ public class CameraManager : MonoBehaviour {
     private void LateUpdate() {
         if (_isMoving) {
             var position = transform.right * (_delta.x * -movementSpeed);
-            //position += transform.up * (_delta.y * -movementSpeed);
             transform.position += position * Time.deltaTime;
         }
 
@@ -56,31 +55,31 @@ public class CameraManager : MonoBehaviour {
             transform.rotation = Quaternion.Euler(_xRotation, transform.rotation.eulerAngles.y, 0.0f);
         }
 
-        if(transform.rotation.eulerAngles.y == 45.0f) {
-            _walls[0].SetActive(false);
-            _walls[1].SetActive(false);
-            _walls[2].SetActive(true);
-            _walls[3].SetActive(true);
-        }
-        if (transform.rotation.eulerAngles.y == 315.0f) {
-            _walls[0].SetActive(true);
-            _walls[1].SetActive(false);
-            _walls[2].SetActive(false);
-            _walls[3].SetActive(true);
-        }
-        if (transform.rotation.eulerAngles.y == 225.0f) {
-            _walls[0].SetActive(true);
-            _walls[1].SetActive(true);
-            _walls[2].SetActive(false);
-            _walls[3].SetActive(false);
-        }
-        if (transform.rotation.eulerAngles.y == 135.0f) {
-            _walls[0].SetActive(false);
-            _walls[1].SetActive(true);
-            _walls[2].SetActive(true);
-            _walls[3].SetActive(false);
-        }
 
+        if (Mathf.Approximately(transform.rotation.eulerAngles.y, 45.0f)) {
+            _walls[0].GetComponentInChildren<Renderer>().enabled = false;
+            _walls[1].GetComponentInChildren<Renderer>().enabled = false;
+            _walls[2].GetComponentInChildren<Renderer>().enabled = true;
+            _walls[3].GetComponentInChildren<Renderer>().enabled = true;
+
+        } else if (Mathf.Approximately(transform.rotation.eulerAngles.y, 315.0f)) {
+            _walls[0].GetComponentInChildren<Renderer>().enabled = true;
+            _walls[1].GetComponentInChildren<Renderer>().enabled = false;
+            _walls[2].GetComponentInChildren<Renderer>().enabled = false;
+            _walls[3].GetComponentInChildren<Renderer>().enabled = true;
+
+        } else if (Mathf.Approximately(transform.rotation.eulerAngles.y, 225.0f)) {
+            _walls[0].GetComponentInChildren<Renderer>().enabled = true;
+            _walls[1].GetComponentInChildren<Renderer>().enabled = true;
+            _walls[2].GetComponentInChildren<Renderer>().enabled = false;
+            _walls[3].GetComponentInChildren<Renderer>().enabled = false;
+
+        } else if (Mathf.Approximately(transform.rotation.eulerAngles.y, 135.0f)) {
+            _walls[0].GetComponentInChildren<Renderer>().enabled = false;
+            _walls[1].GetComponentInChildren<Renderer>().enabled = true;
+            _walls[2].GetComponentInChildren<Renderer>().enabled = true;
+            _walls[3].GetComponentInChildren<Renderer>().enabled = false;
+        }
     }
 
     private void SnapRotation() {

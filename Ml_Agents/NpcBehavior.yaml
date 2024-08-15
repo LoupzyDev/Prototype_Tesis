@@ -13,12 +13,18 @@ behaviors:
     network_settings:
       normalize: false
       hidden_units: 256
-      num_layers: 1
+      num_layers: 2
       vis_encode_type: simple
     reward_signals:
       extrinsic:
         gamma: 0.9
         strength: 1.0
+      gail:
+        strength: 0.5
+        demo_path: Demos/NpcBehavior.demo
+    behavioral_cloning:
+        strength: 0.5
+        demo_path: Demos/NpcBehavior.demo
     keep_checkpoints: 5
     max_steps: 2000000
     time_horizon: 64
