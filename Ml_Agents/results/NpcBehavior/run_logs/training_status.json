@@ -1,0 +1,29 @@
+{
+    "NpcBehavior": {
+        "checkpoints": [
+            {
+                "steps": 188049,
+                "file_path": "results\\NpcBehavior\\NpcBehavior\\NpcBehavior-188049.onnx",
+                "reward": -13.387096774193548,
+                "creation_time": 1724049810.0337496,
+                "auxillary_file_paths": [
+                    "results\\NpcBehavior\\NpcBehavior\\NpcBehavior-188049.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 188049,
+            "file_path": "results\\NpcBehavior\\NpcBehavior.onnx",
+            "reward": -13.387096774193548,
+            "creation_time": 1724049810.0337496,
+            "auxillary_file_paths": [
+                "results\\NpcBehavior\\NpcBehavior\\NpcBehavior-188049.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0.dev0",
+        "torch_version": "2.4.0+cpu"
+    }
+}
