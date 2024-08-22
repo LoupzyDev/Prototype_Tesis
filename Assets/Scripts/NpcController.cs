@@ -7,7 +7,8 @@ public enum NpcState {
     None,
     Playing,
     Working,
-    Walking
+    Walking,
+    Sleeping
 }
 
 public class NpcController : MonoBehaviour {
@@ -20,12 +21,17 @@ public class NpcController : MonoBehaviour {
     [SerializeField] private GameObject[] funObjects;
     private GameObject nearestWorkObj;
     private GameObject nearestFunObj;
+    [SerializeField] private GameObject door;
 
     private DeskController currentDesk; // Referencia al escritorio actual
 
+    private float timeElapsed; // Variable para el tiempo transcurrido
+    private bool isTimerRunning; // Flag para saber si el temporizador está corriendo
+    [SerializeField] private float timeDay = 60;
     private void Start() {
         // Inicia en el estado que consideres adecuado
         ChangeGameState(NpcState.Walking); // Ejemplo para iniciar en Walking
+        StartTimer(); // Inicia el temporizador
     }
 
     private void Update() {
@@ -40,6 +46,15 @@ public class NpcController : MonoBehaviour {
         if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.Z)) {
             ChangeGameState(NpcState.None);
             SetDestination();
+        }
+
+        // Actualiza el temporizador
+        if (isTimerRunning) {
+            timeElapsed += Time.deltaTime;
+            if (timeElapsed >= timeDay) {
+                ChangeGameState(NpcState.Sleeping); // Cambia al estado Sleeping después de 60 segundos
+                StopTimer(); // Detiene el temporizador
+            }
         }
     }
 
@@ -78,11 +93,26 @@ public class NpcController : MonoBehaviour {
             case NpcState.Walking:
                 StartCoroutine(WalkRandomly());
                 break;
+            case NpcState.Sleeping:
+                agent.SetDestination(door.transform.position);
+                Destroy(gameObject, 1.5f);
+                break;
         }
     }
 
     public void ChangeStateFromButton(int newState) {
         ChangeGameState((NpcState)newState);
+    }
+
+    // Método para iniciar el temporizador
+    private void StartTimer() {
+        timeElapsed = 0f;
+        isTimerRunning = true;
+    }
+
+    // Método para detener el temporizador
+    private void StopTimer() {
+        isTimerRunning = false;
     }
 
     // Método para encontrar el objeto más cercano de un array de objetos
@@ -153,6 +183,7 @@ public class NpcController : MonoBehaviour {
             for (var i = 0; i < agent.path.corners.Length - 1; i++) {
                 Debug.DrawLine(agent.path.corners[i], agent.path.corners[i + 1], Color.blue);
             }
-        } 
+        }
     }
 }
+    
