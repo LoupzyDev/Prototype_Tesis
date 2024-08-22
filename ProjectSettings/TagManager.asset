@@ -9,6 +9,7 @@ TagManager:
   - Fun
   - Npc
   - Occupied
+  - DragParent
   layers:
   - Default
   - TransparentFX
