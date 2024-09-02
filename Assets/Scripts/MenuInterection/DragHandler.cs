@@ -6,7 +6,9 @@ using UnityEngine.EventSystems;
 public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler {
 
     public static GameObject taskDragging;
-    public string taskType; // Tipo o identificador de la tarea
+    public string taskType;
+    public float timeTask;
+    
     private Vector3 startPosition;
     private Transform startParent;
     private Transform dragParent;

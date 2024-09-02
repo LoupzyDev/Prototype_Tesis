@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -7,12 +8,32 @@ public class GameManager : MonoBehaviour {
 
     private List<NpcController> npcControllers;
 
+
+
+
     private void Awake() {
         _instance = this;
         InitializeNpcControllers();
     }
 
-    // Busca todos los NPCs al inicio del juego y los almacena en la lista
+
+    public void StartNpcTask(int npcIndex, float duration, NpcState taskState) {
+        NpcController npc = GetNpcController(npcIndex);
+        npc.StartTask(duration, taskState);
+    }
+
+    private NpcController GetNpcController(int index) {
+        // Asume que tienes una lista o array de NPCs a los que puedes acceder por índice
+        return npcControllers[index];
+    }
+    // Cambia el estado de todos los NPCs a Sleeping
+    public void SetAllNpcsToSleeping() {
+        foreach (NpcController npcController in npcControllers) {
+            npcController.ChangeGameState(NpcState.Sleeping); // Cambia el estado a Sleeping
+        }
+    }
+
+    // Inicializa los controladores de NPCs
     private void InitializeNpcControllers() {
         npcControllers = new List<NpcController>();
         GameObject[] npcs = GameObject.FindGameObjectsWithTag("Npc");

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ public class PlacementSystem : MonoBehaviour
 
     IBuildingState buildingState;
 
-
+    [SerializeField] private NavMeshSurface navMeshSurface;
 
     private void Start()
     {
@@ -62,8 +63,12 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
+    public void CloseWindows() {
 
-    public void StartRemoving()
+        StopPlacement();
+
+    }
+    public void StartRemoving()     
     {
         StopPlacement();
         gridVisualization.SetActive(true) ;
@@ -81,7 +86,10 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
+
         buildingState.OnAction(gridPosition);
+        navMeshSurface.BuildNavMesh();
+
 
     }
 

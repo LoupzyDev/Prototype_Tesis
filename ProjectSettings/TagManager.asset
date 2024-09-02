@@ -10,6 +10,7 @@ TagManager:
   - Npc
   - Occupied
   - DragParent
+  - Door
   layers:
   - Default
   - TransparentFX

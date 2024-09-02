@@ -25,13 +25,12 @@ public class NpcController : MonoBehaviour {
 
     private DeskController currentDesk; // Referencia al escritorio actual
 
-    private float timeElapsed; // Variable para el tiempo transcurrido
-    private bool isTimerRunning; // Flag para saber si el temporizador está corriendo
-    [SerializeField] private float timeDay = 60;
+    [SerializeField] private NpcTask npcTask;
+
+
     private void Start() {
         // Inicia en el estado que consideres adecuado
         ChangeGameState(NpcState.Walking); // Ejemplo para iniciar en Walking
-        StartTimer(); // Inicia el temporizador
     }
 
     private void Update() {
@@ -46,15 +45,6 @@ public class NpcController : MonoBehaviour {
         if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.Z)) {
             ChangeGameState(NpcState.None);
             SetDestination();
-        }
-
-        // Actualiza el temporizador
-        if (isTimerRunning) {
-            timeElapsed += Time.deltaTime;
-            if (timeElapsed >= timeDay) {
-                ChangeGameState(NpcState.Sleeping); // Cambia al estado Sleeping después de 60 segundos
-                StopTimer(); // Detiene el temporizador
-            }
         }
     }
 
@@ -95,7 +85,6 @@ public class NpcController : MonoBehaviour {
                 break;
             case NpcState.Sleeping:
                 agent.SetDestination(door.transform.position);
-                Destroy(gameObject, 1.5f);
                 break;
         }
     }
@@ -104,16 +93,6 @@ public class NpcController : MonoBehaviour {
         ChangeGameState((NpcState)newState);
     }
 
-    // Método para iniciar el temporizador
-    private void StartTimer() {
-        timeElapsed = 0f;
-        isTimerRunning = true;
-    }
-
-    // Método para detener el temporizador
-    private void StopTimer() {
-        isTimerRunning = false;
-    }
 
     // Método para encontrar el objeto más cercano de un array de objetos
     private void FindNearestObject(GameObject[] objects, out GameObject nearestObject) {
@@ -149,10 +128,6 @@ public class NpcController : MonoBehaviour {
     private void CheckIfDestinationReached() {
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance) {
             agent.ResetPath();
-            if (state == NpcState.Walking) {
-                // Al llegar al destino mientras camina aleatoriamente, cambia el estado a None o a otro estado según la lógica
-                ChangeGameState(NpcState.None); // O el estado que desees
-            }
         }
     }
 
@@ -184,6 +159,23 @@ public class NpcController : MonoBehaviour {
                 Debug.DrawLine(agent.path.corners[i], agent.path.corners[i + 1], Color.blue);
             }
         }
+    }
+    public void StartTask(float duration, NpcState taskState) {
+        StartCoroutine(TaskRoutine(duration, taskState));
+    }
+
+    private IEnumerator TaskRoutine(float duration, NpcState taskState) {
+        ChangeGameState(taskState); // Cambia al estado de la tarea (Work o Play)
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration) {
+            elapsedTime += Time.deltaTime;
+            // Actualiza la barra de tiempo
+            npcTask.UpdateTimeBar(duration, elapsedTime);
+            yield return null;
+        }
+        npcTask.offTimeBar();
+        ChangeGameState(NpcState.Walking); // Cambia a Walking después de completar la tarea
     }
 }
     

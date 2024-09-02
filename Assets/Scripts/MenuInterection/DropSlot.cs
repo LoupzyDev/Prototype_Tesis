@@ -25,50 +25,44 @@ public class DropSlot : MonoBehaviour, IDropHandler {
     }
 
     private void ExecuteTask(int npcNumber, string taskType) {
+        float taskDuration = task.GetComponent<DragHandler>().timeTask; // Obtener la duración de la tarea
+
         switch (npcNumber) {
             case 0:
                 if (taskType == "Work") {
-                    TaskWork();
-                    GameManager._instance.ChangeNpcStateByIndex(0, 2);
+                    GameManager._instance.StartNpcTask(0, taskDuration, NpcState.Working);
                 } else if (taskType == "Play") {
-                    TaskPlay();
-                    GameManager._instance.ChangeNpcStateByIndex(0, 1);
+                    GameManager._instance.StartNpcTask(0, taskDuration, NpcState.Playing);
                 }
                 break;
             case 1:
                 if (taskType == "Work") {
-                    TaskWork();
-                    GameManager._instance.ChangeNpcStateByIndex(1, 2);
+                    GameManager._instance.StartNpcTask(1, taskDuration, NpcState.Working);
                 } else if (taskType == "Play") {
-                    TaskPlay();
-                    GameManager._instance.ChangeNpcStateByIndex(1, 1);
+                    GameManager._instance.StartNpcTask(1, taskDuration, NpcState.Playing);
                 }
                 break;
             case 2:
                 if (taskType == "Work") {
-                    TaskWork();
-                    GameManager._instance.ChangeNpcStateByIndex(2, 2);
+                    GameManager._instance.StartNpcTask(2, taskDuration, NpcState.Working);
                 } else if (taskType == "Play") {
-                    TaskPlay();
-                    GameManager._instance.ChangeNpcStateByIndex(2, 1);
+                    GameManager._instance.StartNpcTask(2, taskDuration, NpcState.Playing);
                 }
                 break;
             case 3:
                 if (taskType == "Work") {
-                    TaskWork();
-                    GameManager._instance.ChangeNpcStateByIndex(3, 2);
+                    GameManager._instance.StartNpcTask(3, taskDuration, NpcState.Working);
                 } else if (taskType == "Play") {
-                    TaskPlay();
-                    GameManager._instance.ChangeNpcStateByIndex(3, 1);
+                    GameManager._instance.StartNpcTask(3, taskDuration, NpcState.Playing);
                 }
                 break;
 
-            // Agrega más casos según los NPCs y tipos de tareas que tengas
             default:
                 Debug.Log("Unknown NPC or task type");
                 break;
         }
     }
+
 
     private void TaskWork() {
         // Código específico para la tarea de trabajo
