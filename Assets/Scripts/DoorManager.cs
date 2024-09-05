@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DoorManager : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Npc")) {
-            collision.gameObject.SetActive(false);
+    [SerializeField] Clock clock;
+
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Npc") && clock.isNigth) {
+            other.gameObject.SetActive(false);
         }
     }
 }

@@ -15,12 +15,15 @@ public class DropSlot : MonoBehaviour, IDropHandler {
                 task.transform.SetParent(transform);
                 task.transform.position = transform.position;
 
-                // Obtén el tipo de tarea
                 string taskType = task.GetComponent<DragHandler>().taskType;
 
                 // Ejecuta la función correspondiente usando el número del NPC asignado a este DropSlot
                 ExecuteTask(assignedNpcNumber, taskType);
             }
+        } else {
+            // Si ya hay una tarea asignada, la tarea arrastrada vuelve a su posición original
+            DragHandler.taskDragging.transform.position = DragHandler.taskDragging.GetComponent<DragHandler>().startPosition;
+            DragHandler.taskDragging.transform.SetParent(DragHandler.taskDragging.GetComponent<DragHandler>().startParent);
         }
     }
 
@@ -63,16 +66,6 @@ public class DropSlot : MonoBehaviour, IDropHandler {
         }
     }
 
-
-    private void TaskWork() {
-        // Código específico para la tarea de trabajo
-        Debug.Log("Executed Task Type: Work");
-    }
-
-    private void TaskPlay() {
-        // Código específico para la tarea de juego
-        Debug.Log("Executed Task Type: Play");
-    }
 
     private void Update() {
         if (task != null && task.transform.parent != transform) {

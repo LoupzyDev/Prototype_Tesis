@@ -9,8 +9,8 @@ public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginD
     public string taskType;
     public float timeTask;
     
-    private Vector3 startPosition;
-    private Transform startParent;
+    public Vector3 startPosition;
+    public Transform startParent;
     private Transform dragParent;
     private CanvasGroup canvasGroup;
 

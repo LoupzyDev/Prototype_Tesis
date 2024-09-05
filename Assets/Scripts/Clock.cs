@@ -9,7 +9,7 @@ public class Clock : MonoBehaviour {
     [SerializeField] private int minutos;
     [SerializeField] private int horas;
     public int velocidaddeltiempo = 1;
-    private bool isNigth=false;
+    public bool isNigth=false;
 
     void Update() {
         segundos += Time.deltaTime * velocidaddeltiempo;
