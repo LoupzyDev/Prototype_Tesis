@@ -24,11 +24,14 @@ public class Clock : MonoBehaviour {
         }
         if (horas >= 24) {
             horas = 0; 
-            isNigth = false;
         }
         if(horas == 22 && !isNigth) {
             GameManager._instance.SetAllNpcsToSleeping();
             isNigth = true;
+        }
+        if (horas == 7 && isNigth) {
+            isNigth = false;
+            GameManager._instance.SetAllNpcsToWakeUp();
         }
         AjustarIntensidadDeLuz();
         ModificarTextoDelTiempo();

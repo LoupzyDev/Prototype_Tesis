@@ -32,7 +32,12 @@ public class GameManager : MonoBehaviour {
             npcController.ChangeGameState(NpcState.Sleeping); // Cambia el estado a Sleeping
         }
     }
-
+    public void SetAllNpcsToWakeUp() {
+        foreach (NpcController npcController in npcControllers) {
+            npcController.gameObject.SetActive(true);
+            npcController.ChangeGameState(NpcState.Walking); // Cambia el estado a Walking
+        }
+    }
     // Inicializa los controladores de NPCs
     private void InitializeNpcControllers() {
         npcControllers = new List<NpcController>();

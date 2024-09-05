@@ -6,7 +6,7 @@ public class DoorManager : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Npc")) {
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
 }
