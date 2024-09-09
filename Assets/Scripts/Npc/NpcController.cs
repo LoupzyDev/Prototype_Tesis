@@ -27,6 +27,9 @@ public class NpcController : MonoBehaviour {
 
     [SerializeField] private NpcTask npcTask;
 
+    private int stamina = 100;
+    private float timer = 0f;
+    public float interval = 1f;
 
     private void Start() {
         // Inicia en el estado que consideres adecuado
@@ -34,6 +37,8 @@ public class NpcController : MonoBehaviour {
     }
 
     private void Update() {
+
+
         workObjects = GameObject.FindGameObjectsWithTag("Work");
         funObjects = GameObject.FindGameObjectsWithTag("Fun");
 
@@ -46,6 +51,21 @@ public class NpcController : MonoBehaviour {
             ChangeGameState(NpcState.None);
             SetDestination();
         }
+
+        timer += Time.deltaTime;
+
+        if (timer >= interval) {
+            timer = 0f; 
+
+            if (state == NpcState.Working) {
+                stamina -= 1;
+            } else if (state == NpcState.Playing) {
+                stamina += 1;
+            }
+            stamina = Mathf.Clamp(stamina, 0, 100);
+        }
+
+
     }
 
     public void ChangeGameState(NpcState newState) {
@@ -176,6 +196,10 @@ public class NpcController : MonoBehaviour {
         }
         npcTask.offTimeBar();
         ChangeGameState(NpcState.Walking); // Cambia a Walking después de completar la tarea
+    }
+
+    public int getStamina() {
+        return stamina;
     }
 }
     

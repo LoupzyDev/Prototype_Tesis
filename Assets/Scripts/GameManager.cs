@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager _instance;
 
+    [SerializeField]
     private List<NpcController> npcControllers;
 
 
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour {
 
     private void Awake() {
         _instance = this;
-        InitializeNpcControllers();
+        //InitializeNpcControllers();
     }
 
 
