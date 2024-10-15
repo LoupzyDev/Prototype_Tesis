@@ -1,6 +1,14 @@
 using UnityEngine;
-
+public enum objState {
+    north,
+    east,
+    south,
+    west
+}
 public class PlacementState : IBuildingState {
+
+    public objState state;
+
     private int selectedObjectIndex = -1;
     private int rotationIndex = 0; 
     int ID;
@@ -73,26 +81,34 @@ public class PlacementState : IBuildingState {
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity);
     }
 
-    public void RotateObject(bool clockwise) {
-        if (clockwise) {
-            rotationIndex = (rotationIndex + 1) % 4;
-        } else {
-            rotationIndex = (rotationIndex - 1 + 4) % 4;
-        }
-
-        UpdateObjectSize();
-    }
-    public void RotateFuture() {
+    public void ChangeGameState(objState newState) {
+        state = newState;
         GameObject prefab = database.objectsData[selectedObjectIndex].Prefab;
 
         Transform firstChild = prefab.transform.GetChild(0);
+        Transform secondChild = prefab.transform.GetChild(1);
 
-        if (Quaternion.Angle(firstChild.rotation, Quaternion.Euler(0, 0, 0)) < 0.01f) {
-            firstChild.rotation = Quaternion.Euler(0, 180, 0);
-            previewSystem.RotatePreview(true); // Rotar en sentido horario
-        } else {
-            firstChild.rotation = Quaternion.Euler(0, 0, 0);
-            previewSystem.RotatePreview(false); // Rotar en sentido antihorario
+
+        firstChild.gameObject.SetActive(false);
+        secondChild.gameObject.SetActive(false);
+
+        switch (state) {
+            case objState.north:
+                firstChild.rotation = Quaternion.Euler(0, 0, 0);
+                firstChild.gameObject.SetActive(true);
+                break;
+            case objState.east:
+                secondChild.rotation = Quaternion.Euler(0, 90, 0);
+                secondChild.gameObject.SetActive(true);
+                break;
+            case objState.south:
+                firstChild.rotation = Quaternion.Euler(0, 180, 0);
+                firstChild.gameObject.SetActive(true);
+                break;
+            case objState.west:
+                secondChild.rotation = Quaternion.Euler(0, 270, 0);
+                secondChild.gameObject.SetActive(true);
+                break;
         }
     }
 
@@ -102,14 +118,12 @@ public class PlacementState : IBuildingState {
         int newSizeX = objectData.Size.x;
         int newSizeY = objectData.Size.y;
 
-        if (rotationIndex % 2 == 1) // Rotación 90 o 270 grados
-        {
-            (newSizeX, newSizeY) = (newSizeY, newSizeX);
-        }
+
+       (newSizeX, newSizeY) = (newSizeY, newSizeX);
+
 
         objectData.Size = new Vector2Int(newSizeX, newSizeY);
         previewSystem.UpdateCursorSize(newSizeX, newSizeY);
-        previewSystem.RotatePreview(rotationIndex % 2 == 1); // Aplicar rotación
     }
 
 }

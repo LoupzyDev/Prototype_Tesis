@@ -127,15 +127,32 @@ public class PlacementSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q)) {
             if (buildingState is PlacementState placementState) {
-                placementState.RotateFuture();
+                objState newState = placementState.state switch {
+                    objState.north => objState.west,
+                    objState.west => objState.south,
+                    objState.south => objState.east,
+                    objState.east => objState.north,
+                    _ => objState.north
+                };
+                placementState.ChangeGameState(newState);
             }
         }
+
         if (Input.GetKeyDown(KeyCode.E)) {
             if (buildingState is PlacementState placementState) {
-                placementState.RotateFuture();
+
+                objState newState = placementState.state switch {
+                    objState.north => objState.east,
+                    objState.east => objState.south,
+                    objState.south => objState.west,
+                    objState.west => objState.north,
+                    _ => objState.north
+                };
+                placementState.ChangeGameState(newState);
             }
         }
     }
+
 
 
 }
