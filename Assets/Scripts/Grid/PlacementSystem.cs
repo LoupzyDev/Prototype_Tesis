@@ -52,6 +52,7 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         gridVisualization.SetActive(true);
+
         buildingState = new PlacementState(ID,
                                            grid,
                                            preview,

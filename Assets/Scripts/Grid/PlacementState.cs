@@ -10,7 +10,6 @@ public class PlacementState : IBuildingState {
     public objState state;
 
     private int selectedObjectIndex = -1;
-    private int rotationIndex = 0; 
     int ID;
     Grid grid;
     PreviewSystem previewSystem;
@@ -18,6 +17,7 @@ public class PlacementState : IBuildingState {
     GridData floorData;
     GridData furnitureData;
     ObjectPlacer objectPlacer;
+
 
     public PlacementState(int iD,
                           Grid grid,
@@ -45,6 +45,7 @@ public class PlacementState : IBuildingState {
 
     public void EndState() {
         previewSystem.StopShowingPreview();
+
     }
 
     public void OnAction(Vector3Int gridPosition) {
@@ -88,26 +89,43 @@ public class PlacementState : IBuildingState {
         Transform firstChild = prefab.transform.GetChild(0);
         Transform secondChild = prefab.transform.GetChild(1);
 
+        Transform firstChildPreviw = previewSystem.previewObject.transform.GetChild(0);
+        Transform secondChildPreviw = previewSystem.previewObject.transform.GetChild(1);
+
 
         firstChild.gameObject.SetActive(false);
         secondChild.gameObject.SetActive(false);
 
+        firstChildPreviw.gameObject.SetActive(false);
+        secondChildPreviw.gameObject.SetActive(false);
+
+
+        UpdateObjectSize();
+
+
         switch (state) {
             case objState.north:
-                firstChild.rotation = Quaternion.Euler(0, 0, 0);
+                firstChild.rotation =firstChildPreviw.rotation= Quaternion.Euler(0, 0, 0);
                 firstChild.gameObject.SetActive(true);
+                firstChildPreviw.gameObject.SetActive(true);
+
                 break;
             case objState.east:
-                secondChild.rotation = Quaternion.Euler(0, 90, 0);
+                secondChild.rotation= secondChildPreviw.rotation = Quaternion.Euler(0, 90, 0);
                 secondChild.gameObject.SetActive(true);
+                secondChildPreviw.gameObject.SetActive(true);
+
                 break;
             case objState.south:
-                firstChild.rotation = Quaternion.Euler(0, 180, 0);
+                firstChild.rotation=firstChildPreviw.rotation = Quaternion.Euler(0, 180, 0);
                 firstChild.gameObject.SetActive(true);
+                firstChildPreviw.gameObject.SetActive(true);
+
                 break;
             case objState.west:
-                secondChild.rotation = Quaternion.Euler(0, 270, 0);
+                secondChild.rotation=secondChildPreviw.rotation = Quaternion.Euler(0, 270, 0);
                 secondChild.gameObject.SetActive(true);
+                secondChildPreviw.gameObject.SetActive(true);
                 break;
         }
     }

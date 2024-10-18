@@ -8,7 +8,7 @@ public class PreviewSystem : MonoBehaviour
 
     [SerializeField]
     private GameObject cellIndicator;
-    private GameObject previewObject;
+    public GameObject previewObject;
 
     [SerializeField]
     private Material previewMaterialPrefab;
@@ -16,11 +16,14 @@ public class PreviewSystem : MonoBehaviour
 
     private Renderer cellIndicatorRenderer;
 
+    PlacementState placementState;
+
     private void Start()
     {
         previewMaterialInstance = new Material(previewMaterialPrefab);
         cellIndicator.SetActive(false);
         cellIndicatorRenderer = cellIndicator.GetComponentInChildren<Renderer>();
+
     }
 
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
@@ -39,20 +42,21 @@ public class PreviewSystem : MonoBehaviour
             cellIndicatorRenderer.material.mainTextureScale = size;
         }
     }
-
-    private void PreparePreview(GameObject previewObject)
-    {
-        Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
-        foreach(Renderer renderer in renderers)
+        
+        private void PreparePreview(GameObject previewObject)
         {
-            Material[] materials = renderer.materials;
-            for (int i = 0; i < materials.Length; i++)
-            {
-                materials[i] = previewMaterialInstance;
+            Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
+            for (int i = 0; i < renderers.Length; i++){
+                renderers[i].material=previewMaterialInstance;
+                renderers[i].gameObject.SetActive(false);
+                //Material[] materials = renderers[i].materials;
+                //for (int j = 0; j < materials.Length; j++)
+                //{
+                //    materials[j] = previewMaterialInstance;
+                //}
+                //renderers[i].materials = materials; 
             }
-            renderer.materials = materials;
         }
-    }
 
     public void StopShowingPreview()
     {
