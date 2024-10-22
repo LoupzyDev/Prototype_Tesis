@@ -42,21 +42,25 @@ public class PreviewSystem : MonoBehaviour
             cellIndicatorRenderer.material.mainTextureScale = size;
         }
     }
-        
-        private void PreparePreview(GameObject previewObject)
-        {
-            Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
-            for (int i = 0; i < renderers.Length; i++){
-                renderers[i].material=previewMaterialInstance;
+    private void PreparePreview(GameObject previewObject) {
+        Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>(true); // true para incluir objetos inactivos
+        for (int i = 0; i < renderers.Length; i++) {
+
+            bool wasActive = renderers[i].gameObject.activeSelf;
+
+
+            if (!wasActive) {
+                renderers[i].gameObject.SetActive(true);
+            }
+
+            renderers[i].material = previewMaterialInstance;
+
+            if (!wasActive) {
                 renderers[i].gameObject.SetActive(false);
-                //Material[] materials = renderers[i].materials;
-                //for (int j = 0; j < materials.Length; j++)
-                //{
-                //    materials[j] = previewMaterialInstance;
-                //}
-                //renderers[i].materials = materials; 
             }
         }
+    }
+
 
     public void StopShowingPreview()
     {

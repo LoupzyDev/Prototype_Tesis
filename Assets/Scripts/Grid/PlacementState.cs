@@ -44,6 +44,7 @@ public class PlacementState : IBuildingState {
     }
 
     public void EndState() {
+
         previewSystem.StopShowingPreview();
 
     }
@@ -80,11 +81,14 @@ public class PlacementState : IBuildingState {
     public void UpdateState(Vector3Int gridPosition) {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity);
+
     }
 
     public void ChangeGameState(objState newState) {
         state = newState;
         GameObject prefab = database.objectsData[selectedObjectIndex].Prefab;
+
+        var objectData = database.objectsData[selectedObjectIndex];
 
         Transform firstChild = prefab.transform.GetChild(0);
         Transform secondChild = prefab.transform.GetChild(1);
@@ -100,48 +104,47 @@ public class PlacementState : IBuildingState {
         secondChildPreviw.gameObject.SetActive(false);
 
 
-        UpdateObjectSize();
+        int originalSizeX = objectData.Size.x;
+        int originalSizeY = objectData.Size.y;
 
+        Vector2Int originalSize = new Vector2Int(originalSizeX, originalSizeY);
+        Vector2Int newSize = new Vector2Int(originalSizeY, originalSizeX);
+
+
+        Debug.Log($"Estado del mueble: {state}");
 
         switch (state) {
             case objState.north:
                 firstChild.rotation =firstChildPreviw.rotation= Quaternion.Euler(0, 0, 0);
                 firstChild.gameObject.SetActive(true);
                 firstChildPreviw.gameObject.SetActive(true);
-
+                objectData.Size = originalSize;
+                previewSystem.UpdateCursorSize(originalSizeX, originalSizeY);
                 break;
             case objState.east:
                 secondChild.rotation= secondChildPreviw.rotation = Quaternion.Euler(0, 90, 0);
                 secondChild.gameObject.SetActive(true);
                 secondChildPreviw.gameObject.SetActive(true);
+                objectData.Size = newSize;
+                previewSystem.UpdateCursorSize(originalSizeY, originalSizeX);
 
                 break;
             case objState.south:
                 firstChild.rotation=firstChildPreviw.rotation = Quaternion.Euler(0, 180, 0);
                 firstChild.gameObject.SetActive(true);
                 firstChildPreviw.gameObject.SetActive(true);
+                objectData.Size = originalSize;
+                previewSystem.UpdateCursorSize(originalSizeX, originalSizeY);
 
                 break;
             case objState.west:
                 secondChild.rotation=secondChildPreviw.rotation = Quaternion.Euler(0, 270, 0);
                 secondChild.gameObject.SetActive(true);
                 secondChildPreviw.gameObject.SetActive(true);
+                objectData.Size = newSize;
+                previewSystem.UpdateCursorSize(originalSizeY, originalSizeX);
                 break;
         }
-    }
-
-
-    private void UpdateObjectSize() {
-        var objectData = database.objectsData[selectedObjectIndex];
-        int newSizeX = objectData.Size.x;
-        int newSizeY = objectData.Size.y;
-
-
-       (newSizeX, newSizeY) = (newSizeY, newSizeX);
-
-
-        objectData.Size = new Vector2Int(newSizeX, newSizeY);
-        previewSystem.UpdateCursorSize(newSizeX, newSizeY);
     }
 
 }

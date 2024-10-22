@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1318,10 +1318,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 699.3, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &221827929
 MonoBehaviour:
@@ -1509,6 +1509,17 @@ MonoBehaviour:
   funObjects: []
   door: {fileID: 821839087}
   npcTask: {fileID: 643550457}
+  npcDataSO: {fileID: 11400000, guid: 7bef640817f52e14fa5f5909cb10e318, type: 2}
+  npcIndex: 0
+  hp: 0
+  stamina: 100
+  moral: 0
+  happiness: 0
+  speedTask: 0
+  quality: 0
+  role: 
+  workLoad: 0
+  minWorkLoad: 0
   interval: 0.1
 --- !u!195 &278321772
 NavMeshAgent:
@@ -3540,6 +3551,17 @@ MonoBehaviour:
   funObjects: []
   door: {fileID: 821839087}
   npcTask: {fileID: 1600946645}
+  npcDataSO: {fileID: 11400000, guid: 7bef640817f52e14fa5f5909cb10e318, type: 2}
+  npcIndex: 0
+  hp: 0
+  stamina: 100
+  moral: 0
+  happiness: 0
+  speedTask: 0
+  quality: 0
+  role: 
+  workLoad: 0
+  minWorkLoad: 0
   interval: 0.1
 --- !u!1 &643550456
 GameObject:
@@ -3996,6 +4018,17 @@ MonoBehaviour:
   funObjects: []
   door: {fileID: 821839087}
   npcTask: {fileID: 1159331967}
+  npcDataSO: {fileID: 11400000, guid: 7bef640817f52e14fa5f5909cb10e318, type: 2}
+  npcIndex: 1
+  hp: 0
+  stamina: 100
+  moral: 0
+  happiness: 0
+  speedTask: 0
+  quality: 0
+  role: 
+  workLoad: 0
+  minWorkLoad: 0
   interval: 0.1
 --- !u!195 &747850918
 NavMeshAgent:
@@ -5514,10 +5547,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 519.3, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103550930
 MonoBehaviour:
@@ -7262,10 +7295,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 339.3, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522270995
 MonoBehaviour:
@@ -7851,9 +7884,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986bd4ecca861ef4c91b491908d50db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  task: {fileID: 11400000, guid: 7738751d927d71a47ad1d3507f152f2b, type: 2}
+  taskData: {fileID: 0}
   GameObjTask:
   - {fileID: 1671812354}
+  TaskIndex: 0
 --- !u!1001 &1616918711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8041,6 +8075,17 @@ MonoBehaviour:
   funObjects: []
   door: {fileID: 821839087}
   npcTask: {fileID: 738739844}
+  npcDataSO: {fileID: 11400000, guid: 7bef640817f52e14fa5f5909cb10e318, type: 2}
+  npcIndex: 0
+  hp: 0
+  stamina: 100
+  moral: 0
+  happiness: 0
+  speedTask: 0
+  quality: 0
+  role: 
+  workLoad: 0
+  minWorkLoad: 0
   interval: 0.1
 --- !u!195 &1660339181
 NavMeshAgent:
@@ -8188,10 +8233,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1615028006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 190, y: -108}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1671812356
 MonoBehaviour:
@@ -8999,7 +9044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1895352454
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9622,10 +9667,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 159.29999, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141266214
 MonoBehaviour:

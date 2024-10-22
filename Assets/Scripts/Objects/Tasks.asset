@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce9c7e3712f066409c9895c97ee09b4, type: 3}
   m_Name: Tasks
   m_EditorClassIdentifier: 
-  Name: 
-  Description: 
-  Type: 
-  Personal: []
-  Time: 0
+  TaskList:
+  - Name: 
+    Description: 
+    TypeTask: 0
+    Personal: []
+    Time: 0

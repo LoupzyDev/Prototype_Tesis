@@ -27,18 +27,38 @@ public class NpcController : MonoBehaviour {
 
     [SerializeField] private NpcTask npcTask;
 
-    private int stamina = 100;
+    // Referencia al ScriptableObject NpcsSO y al NPCData específico
+    [SerializeField] private NpcsSO npcDataSO;
+    private NPCData currentNpcData;
+
+    public int npcIndex=0;
+    public int hp;
+    public int stamina;
+    public int moral;
+    public int happiness;
+    public int speedTask ;
+    public int quality ;
+
+    public string role;
+
+    public int workLoad ;
+    public int minWorkLoad ;
+
+
+
+
     private float timer = 0f;
     public float interval = 1f;
 
+    private void Awake() {
+        InitializeNpc();
+    }
     private void Start() {
-        // Inicia en el estado que consideres adecuado
-        ChangeGameState(NpcState.Walking); // Ejemplo para iniciar en Walking
+
+        ChangeGameState(NpcState.Walking);
     }
 
     private void Update() {
-
-
         workObjects = GameObject.FindGameObjectsWithTag("Work");
         funObjects = GameObject.FindGameObjectsWithTag("Fun");
 
@@ -55,15 +75,33 @@ public class NpcController : MonoBehaviour {
         timer += Time.deltaTime;
 
         if (timer >= interval) {
-            timer = 0f; 
+            timer = 0f;
 
             if (state == NpcState.Working) {
                 stamina -= 1;
             } else if (state == NpcState.Playing) {
                 stamina += 1;
             }
-            stamina = Mathf.Clamp(stamina, 0, 100);
+            stamina = Mathf.Clamp(stamina, 0, 100); 
         }
+    }
+
+
+    private void InitializeNpc() {
+
+        currentNpcData = npcDataSO.npcList[npcIndex]; 
+
+        gameObject.name = currentNpcData.npcName;
+
+        hp =currentNpcData.HP;
+        stamina = currentNpcData.Stamina;
+        moral = currentNpcData.Moral;
+        happiness = currentNpcData.Happiness;
+        speedTask = currentNpcData.Speed;
+        quality = currentNpcData.Quality;
+        role = currentNpcData.Role.ToString();
+        workLoad = currentNpcData.WorkLoad;
+        minWorkLoad = currentNpcData.MinWorkLoad;
 
 
     }
@@ -84,7 +122,6 @@ public class NpcController : MonoBehaviour {
                 FindNearestObject(funObjects, out nearestFunObj);
                 if (nearestFunObj != null) {
                     agent.SetDestination(nearestFunObj.transform.position);
-                    //Debug.Log("Ready to Play");
                 } else {
                     Debug.Log("No available Fun object found");
                     ChangeGameState(NpcState.Walking);
@@ -94,7 +131,6 @@ public class NpcController : MonoBehaviour {
                 FindNearestObject(workObjects, out nearestWorkObj);
                 if (nearestWorkObj != null) {
                     agent.SetDestination(nearestWorkObj.transform.position);
-                    //Debug.Log("Ready to Work");
                 } else {
                     Debug.Log("No available Work object found");
                     ChangeGameState(NpcState.Walking);
@@ -113,45 +149,39 @@ public class NpcController : MonoBehaviour {
         ChangeGameState((NpcState)newState);
     }
 
-
-    // Método para encontrar el objeto más cercano de un array de objetos
     private void FindNearestObject(GameObject[] objects, out GameObject nearestObject) {
         nearestObject = null;
         float nearestDistance = Mathf.Infinity;
 
         foreach (var obj in objects) {
             DeskController deskController = obj.GetComponent<DeskController>();
-            if (deskController != null && !deskController.IsOccupied()) { // Verifica si no está ocupado
+            if (deskController != null && !deskController.IsOccupied()) {
                 float distance = Vector3.Distance(transform.position, obj.transform.position);
                 if (distance < nearestDistance) {
                     nearestDistance = distance;
                     nearestObject = obj;
-                    currentDesk = deskController; // Asigna el escritorio actual
+                    currentDesk = deskController;
                 }
             }
         }
 
-        // Reserva el escritorio si se encontró uno
         if (nearestObject != null) {
             currentDesk.TryReserveDesk();
         }
     }
 
-    // Método para mover y rotar el NPC
     private void MoveAndRotate() {
         var dir = (agent.steeringTarget - transform.position).normalized;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), 180 * Time.deltaTime);
         agent.Move(dir * agent.speed * Time.deltaTime);
     }
 
-    // Método para verificar si el NPC ha llegado a su destino
     private void CheckIfDestinationReached() {
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance) {
             agent.ResetPath();
         }
     }
 
-    // Método para establecer un nuevo destino
     private void SetDestination() {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit)) {
@@ -159,20 +189,18 @@ public class NpcController : MonoBehaviour {
         }
     }
 
-    // Corutina para caminar aleatoriamente
     private IEnumerator WalkRandomly() {
         while (state == NpcState.Walking) {
-            Vector3 randomDirection = Random.insideUnitSphere * 6; // Ajusta el rango si es necesario
+            Vector3 randomDirection = Random.insideUnitSphere * 6;
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randomDirection, out hit, 10, NavMesh.AllAreas)) {
                 agent.SetDestination(hit.position);
             }
 
-            yield return new WaitForSeconds(Random.Range(2, 5)); // Tiempo aleatorio antes de elegir una nueva dirección
+            yield return new WaitForSeconds(Random.Range(2, 5));
         }
     }
 
-    // Dibujar la ruta del agente en la escena para depuración
     private void OnDrawGizmos() {
         if (agent.hasPath) {
             for (var i = 0; i < agent.path.corners.Length - 1; i++) {
@@ -180,26 +208,25 @@ public class NpcController : MonoBehaviour {
             }
         }
     }
+
     public void StartTask(float duration, NpcState taskState) {
         StartCoroutine(TaskRoutine(duration, taskState));
     }
 
     private IEnumerator TaskRoutine(float duration, NpcState taskState) {
-        ChangeGameState(taskState); // Cambia al estado de la tarea (Work o Play)
+        ChangeGameState(taskState);
 
         float elapsedTime = 0f;
         while (elapsedTime < duration) {
             elapsedTime += Time.deltaTime;
-            // Actualiza la barra de tiempo
             npcTask.UpdateTimeBar(duration, elapsedTime);
             yield return null;
         }
         npcTask.offTimeBar();
-        ChangeGameState(NpcState.Walking); // Cambia a Walking después de completar la tarea
+        ChangeGameState(NpcState.Walking);
     }
 
     public int getStamina() {
         return stamina;
     }
 }
-    
