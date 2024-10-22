@@ -11,6 +11,8 @@ public class Clock : MonoBehaviour {
     public int velocidaddeltiempo = 1;
     public bool isNigth=false;
 
+    public int today = -1;
+
     void Update() {
         segundos += Time.deltaTime * velocidaddeltiempo;
 
@@ -23,7 +25,9 @@ public class Clock : MonoBehaviour {
             minutos = 0;
         }
         if (horas >= 24) {
-            horas = 0; 
+            horas = 0;
+            today++;
+            GameManager._instance.updateTask(today);
         }
         if(horas == 22 && !isNigth) {
             GameManager._instance.SetAllNpcsToSleeping();

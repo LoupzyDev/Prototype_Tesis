@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1318,10 +1318,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 699.3, y: -183}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &221827929
 MonoBehaviour:
@@ -1336,7 +1336,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   task: {fileID: 0}
-  assignedNpcNumber: 3
 --- !u!114 &221827930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5547,10 +5546,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 519.3, y: -183}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103550930
 MonoBehaviour:
@@ -5565,7 +5564,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   task: {fileID: 0}
-  assignedNpcNumber: 2
 --- !u!114 &1103550931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6220,12 +6218,13 @@ GameObject:
   - component: {fileID: 1245064702}
   - component: {fileID: 1245064703}
   - component: {fileID: 1245064704}
+  - component: {fileID: 1245064705}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1245064701
 Transform:
@@ -6259,6 +6258,12 @@ MonoBehaviour:
   - {fileID: 278321771}
   - {fileID: 747850917}
   - {fileID: 641480506}
+  daysDataSO: {fileID: 11400000, guid: aac20a5cb4e203b4b99aa16d3409aea4, type: 2}
+  currentDay:
+    numberOfTasks: 0
+    minQuality: 0
+  clock: {fileID: 1245064703}
+  taskManager: {fileID: 1245064705}
 --- !u!114 &1245064703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6278,6 +6283,7 @@ MonoBehaviour:
   horas: 7
   velocidaddeltiempo: 4
   isNigth: 0
+  today: -1
 --- !u!114 &1245064704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6301,6 +6307,31 @@ MonoBehaviour:
   npc2StaminaText: {fileID: 1174675692}
   npc3StaminaText: {fileID: 206330482}
   npc4StaminaText: {fileID: 517719086}
+--- !u!114 &1245064705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245064699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 986bd4ecca861ef4c91b491908d50db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskData: {fileID: 11400000, guid: 7738751d927d71a47ad1d3507f152f2b, type: 2}
+  currentTaskOS:
+    Name: 
+    Description: 
+    TypeTask: 0
+    Personal: []
+    Time: 0
+  GameObjsTask:
+  - {fileID: 1671812354}
+  - {fileID: 398279023}
+  - {fileID: 746835673}
+  - {fileID: 1029278674}
+  TaskIndex: 0
 --- !u!1 &1253230630
 GameObject:
   m_ObjectHideFlags: 0
@@ -7295,10 +7326,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 339.3, y: -183}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522270995
 MonoBehaviour:
@@ -7313,7 +7344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   task: {fileID: 0}
-  assignedNpcNumber: 1
 --- !u!114 &1522270997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7885,8 +7915,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskData: {fileID: 0}
-  GameObjTask:
-  - {fileID: 1671812354}
+  currentTaskOS:
+    Name: 
+    Description: 
+    TypeTask: 0
+    Personal: []
+    Time: 0
+  GameObjsTask: []
   TaskIndex: 0
 --- !u!1001 &1616918711
 PrefabInstance:
@@ -8218,7 +8253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1671812355
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9044,7 +9079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1895352454
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9667,10 +9702,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 159.29999, y: -183}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141266214
 MonoBehaviour:
@@ -9685,7 +9720,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   task: {fileID: 0}
-  assignedNpcNumber: 0
 --- !u!114 &2141266216
 MonoBehaviour:
   m_ObjectHideFlags: 0

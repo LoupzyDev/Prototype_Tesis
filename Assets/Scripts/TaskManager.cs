@@ -5,15 +5,21 @@ using UnityEngine;
 public class TaskManager : MonoBehaviour
 {
     [SerializeField] private TaskSO taskData;
-    [SerializeField] private GameObject[] GameObjTask;
+    [SerializeField] private TaskData currentTaskOS;
+
+    [SerializeField] private GameObject[] GameObjsTask;
 
     private TaskData currentTaskData;
     [SerializeField] private int TaskIndex;
 
-    private void Start()
+
+    public void addTasks(int numTask, float minQlty)
     {
-        currentTaskData = taskData.TaskList[TaskIndex];
+        for(int i = 0;i<numTask;i++)
+        {
+            GameObjsTask[i].SetActive(true);
+
+        }
     }
-
-
 } 
+ 

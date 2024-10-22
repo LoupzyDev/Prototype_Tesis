@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "ObjectsData", menuName = "ScriptableObjects/ObjectsSO", order = 4)]
 public class ObjectsDatabaseSO : ScriptableObject {
     public List<ObjectData> objectsData;
 }

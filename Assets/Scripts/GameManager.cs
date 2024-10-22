@@ -5,29 +5,27 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public static GameManager _instance;
+    [SerializeField] private List<NpcController> npcControllers;
 
-    [SerializeField]
-    private List<NpcController> npcControllers;
+    [SerializeField] private DaySO daysDataSO;
+    [SerializeField] private DayData currentDay;
 
+    private int numberOfTasks_GM;
+    private float minQuality_GM;
 
-
+    [SerializeField] private Clock clock;
+    [SerializeField] private TaskManager taskManager;
 
     private void Awake() {
         _instance = this;
-        //InitializeNpcControllers();
     }
 
 
     public void StartNpcTask(int npcIndex, float duration, NpcState taskState) {
-        NpcController npc = GetNpcController(npcIndex);
-        npc.StartTask(duration, taskState);
+        npcControllers[npcIndex].StartTask(duration, taskState);
     }
 
-    private NpcController GetNpcController(int index) {
-        // Asume que tienes una lista o array de NPCs a los que puedes acceder por índice
-        return npcControllers[index];
-    }
-    // Cambia el estado de todos los NPCs a Sleeping
+   
     public void SetAllNpcsToSleeping() {
         foreach (NpcController npcController in npcControllers) {
             npcController.ChangeGameState(NpcState.Sleeping); // Cambia el estado a Sleeping
@@ -39,40 +37,14 @@ public class GameManager : MonoBehaviour {
             npcController.ChangeGameState(NpcState.Walking); // Cambia el estado a Walking
         }
     }
-    // Inicializa los controladores de NPCs
-    private void InitializeNpcControllers() {
-        npcControllers = new List<NpcController>();
-        GameObject[] npcs = GameObject.FindGameObjectsWithTag("Npc");
-        foreach (GameObject npc in npcs) {
-            NpcController npcController = npc.GetComponent<NpcController>();
-            if (npcController != null) {
-                npcControllers.Add(npcController);
-            }
-        }
-    }
+   
+    public void updateTask(int dayIndex)
+    {
+        currentDay = daysDataSO.days[dayIndex];
+        numberOfTasks_GM=currentDay.numberOfTasks;
+        minQuality_GM=currentDay.minQuality;
 
-    // Cambia el estado de todos los NPCs a un estado específico
-    public void NpcsState(int state) {
-        foreach (NpcController npcController in npcControllers) {
-            npcController.ChangeStateFromButton(state);
-        }
-    }
-
-    // Cambia el estado de un NPC específico por su índice en la lista
-    public void ChangeNpcStateByIndex(int index, int state) {
-        if (index >= 0 && index < npcControllers.Count) {
-            npcControllers[index].ChangeStateFromButton(state);
-        } else {
-            Debug.LogWarning("Índice de NPC fuera de rango.");
-        }
-    }
-
-    // Cambia el estado de un NPC específico por referencia al objeto NPC
-    public void ChangeNpcStateByReference(NpcController npc, int state) {
-        if (npcControllers.Contains(npc)) {
-            npc.ChangeStateFromButton(state);
-        } else {
-            Debug.LogWarning("El NPC no está en la lista.");
-        }
+        Debug.Log(numberOfTasks_GM + " " +  minQuality_GM);
+        taskManager.addTasks(numberOfTasks_GM, minQuality_GM);
     }
 }
