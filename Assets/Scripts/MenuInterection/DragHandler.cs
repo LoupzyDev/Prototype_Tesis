@@ -7,13 +7,20 @@ using UnityEngine.EventSystems;
 public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler {
 
     public static GameObject taskDragging;
-    public string taskType;
-    public float timeTask;
+
     
     public Vector3 startPosition;
     public Transform startParent;
     private Transform dragParent;
     private CanvasGroup canvasGroup;
+
+    public string nameTask;
+
+    public string descriptionTask;
+
+    public string typeTask;
+
+    public float timeTask;
 
     private void Start() {
         dragParent = GameObject.FindGameObjectWithTag("DragParent").transform;

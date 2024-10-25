@@ -16,7 +16,5 @@ public class TaskData {
     public enum Type { Programmer, Artist, Designer }
     public Type TypeTask;
 
-    public string[] Personal;
-
     public float Time;
 }

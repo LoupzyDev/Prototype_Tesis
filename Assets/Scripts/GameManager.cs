@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour {
         numberOfTasks_GM=currentDay.numberOfTasks;
         minQuality_GM=currentDay.minQuality;
 
-        Debug.Log(numberOfTasks_GM + " " +  minQuality_GM);
-        taskManager.addTasks(numberOfTasks_GM, minQuality_GM);
+        taskManager.addTasks(dayIndex + 1,numberOfTasks_GM, minQuality_GM);
     }
 }

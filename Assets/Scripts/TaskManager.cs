@@ -12,14 +12,30 @@ public class TaskManager : MonoBehaviour
     private TaskData currentTaskData;
     [SerializeField] private int TaskIndex;
 
+    string[] names = new string[] { "Programa una mecánica", "Diseña el UI", "Crea el mapa del mundo" };
+    string[] types = new string[] { "Programmer", "Artist", "Designer" };
+    string[] descriptions = new string[] { "Vas a valer verga", "Vas a valer el doble de verga", "Vas a valer el triple de verga" };
 
-    public void addTasks(int numTask, float minQlty)
+    public void addTasks(int actualDay, int numTask, float minQlty)
     {
-        for(int i = 0;i<numTask;i++)
+        for (int i = 0; i < numTask; i++)
         {
-            GameObjsTask[i].SetActive(true);
-
+            createTask(GameObjsTask[i]);
         }
     }
-} 
- 
+
+    private void createTask(GameObject indexTask)
+    {
+        indexTask.SetActive(true);
+        indexTask.GetComponent<DragHandler>().timeTask = Random.Range(1, 10);
+
+        string randomName = names[Random.Range(0, names.Length)];
+        string randomType = types[Random.Range(0, types.Length)];
+        string randomDescription = descriptions[Random.Range(0, descriptions.Length)];
+
+        indexTask.GetComponent<DragHandler>().nameTask = randomName;
+        indexTask.GetComponent<DragHandler>().typeTask = randomType;
+        indexTask.GetComponent<DragHandler>().descriptionTask = randomDescription;
+    }
+
+}

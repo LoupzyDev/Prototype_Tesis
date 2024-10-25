@@ -1318,10 +1318,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 699.3, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &221827929
 MonoBehaviour:
@@ -2340,10 +2340,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415663069d7bd154bad1f0c5506c3cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskType: Work
-  timeTask: 7
   startPosition: {x: 0, y: 0, z: 0}
   startParent: {fileID: 0}
+  nameTask: 
+  descriptionTask: 
+  typeTask: 
+  timeTask: 0
 --- !u!114 &398279027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3925,10 +3927,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415663069d7bd154bad1f0c5506c3cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskType: Play
-  timeTask: 5
   startPosition: {x: 0, y: 0, z: 0}
   startParent: {fileID: 0}
+  nameTask: 
+  descriptionTask: 
+  typeTask: 
+  timeTask: 0
 --- !u!114 &746835676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5051,10 +5055,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415663069d7bd154bad1f0c5506c3cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskType: Play
-  timeTask: 5
   startPosition: {x: 0, y: 0, z: 0}
   startParent: {fileID: 0}
+  nameTask: 
+  descriptionTask: 
+  typeTask: 
+  timeTask: 0
 --- !u!114 &1029278678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5546,10 +5552,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 519.3, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103550930
 MonoBehaviour:
@@ -6324,7 +6330,6 @@ MonoBehaviour:
     Name: 
     Description: 
     TypeTask: 0
-    Personal: []
     Time: 0
   GameObjsTask:
   - {fileID: 1671812354}
@@ -7326,10 +7331,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 339.3, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522270995
 MonoBehaviour:
@@ -7919,7 +7924,6 @@ MonoBehaviour:
     Name: 
     Description: 
     TypeTask: 0
-    Personal: []
     Time: 0
   GameObjsTask: []
   TaskIndex: 0
@@ -8323,10 +8327,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415663069d7bd154bad1f0c5506c3cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskType: Work
-  timeTask: 7
   startPosition: {x: 0, y: 0, z: 0}
   startParent: {fileID: 0}
+  nameTask: 
+  descriptionTask: 
+  typeTask: 
+  timeTask: 0
 --- !u!225 &1671812359
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -9079,7 +9085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1895352454
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9702,10 +9708,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 159.29999, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141266214
 MonoBehaviour:
