@@ -14,7 +14,7 @@ public class TaskManager : MonoBehaviour
 
     string[] names = new string[] { "Programa una mecánica", "Diseña el UI", "Crea el mapa del mundo" };
     string[] types = new string[] { "Programmer", "Artist", "Designer" };
-    string[] descriptions = new string[] { "Vas a valer verga", "Vas a valer el doble de verga", "Vas a valer el triple de verga" };
+    string[] descriptions = new string[] { "Trabaja ", "Trabaja sin pago", "Hazlo rapido" };
 
     public void addTasks(int actualDay, int numTask, float minQlty) {
         for (int i = 0; i < numTask; i++) {
