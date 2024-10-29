@@ -18,4 +18,6 @@ public class ObjectData {
     public Vector2Int Size { get; set; } = Vector2Int.one; 
     [field: SerializeField]
     public GameObject Prefab { get; private set; }
+
+    public int Price;
 }

@@ -1,4 +1,4 @@
-
+using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,18 +15,23 @@ public class DragHandler : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginD
     private CanvasGroup canvasGroup;
 
     public string nameTask;
-
     public string descriptionTask;
-
     public string typeTask;
-
     public float timeTask;
+
+    [SerializeField] private TextMeshProUGUI taskNameUI;
+    [SerializeField] private TextMeshProUGUI taskTypeUI;
+    [SerializeField] private TextMeshProUGUI taskDescriptionUI;
 
     private void Start() {
         dragParent = GameObject.FindGameObjectWithTag("DragParent").transform;
         canvasGroup = GetComponent<CanvasGroup>();
     }
-
+    public void UpdateTaskUI() {
+        taskNameUI.text = nameTask;
+        taskTypeUI.text = typeTask;
+        taskDescriptionUI.text = descriptionTask;
+    }
     public void OnBeginDrag(PointerEventData eventData) {
         taskDragging = gameObject;
         startPosition = transform.position;

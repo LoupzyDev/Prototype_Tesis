@@ -16,13 +16,21 @@ public class TaskManager : MonoBehaviour
     string[] types = new string[] { "Programmer", "Artist", "Designer" };
     string[] descriptions = new string[] { "Vas a valer verga", "Vas a valer el doble de verga", "Vas a valer el triple de verga" };
 
-    public void addTasks(int actualDay, int numTask, float minQlty)
-    {
-        for (int i = 0; i < numTask; i++)
-        {
-            createTask(GameObjsTask[i]);
+    public void addTasks(int actualDay, int numTask, float minQlty) {
+        for (int i = 0; i < numTask; i++) {
+            GameObject taskObject = GameObjsTask[i];
+            createTask(taskObject);
+
+            // Llama a UpdateTaskUI después de configurar cada tarea
+            taskObject.GetComponent<DragHandler>().UpdateTaskUI();
         }
     }
+    public void DeactivateAllTasks() {
+        foreach (GameObject taskObject in GameObjsTask) {
+            taskObject.SetActive(false); // Desactiva cada tarea
+        }
+    }
+
 
     private void createTask(GameObject indexTask)
     {

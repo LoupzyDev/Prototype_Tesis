@@ -51,23 +51,39 @@ public class PlacementState : IBuildingState {
 
     public void OnAction(Vector3Int gridPosition) {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
-        if (placementValidity == false) {
+        if (!placementValidity) {
             return;
         }
 
-        int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab,
-            grid.CellToWorld(gridPosition));
+        // Obtener el precio del objeto
+        int price = database.objectsData[selectedObjectIndex].Price;
 
-        GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ?
-            furnitureData :
-            furnitureData;
-        selectedData.AddObjectAt(gridPosition,
+        // Verificar si el jugador tiene suficiente dinero
+        if (!GameManager._instance.CanAfford(price)) {
+            Debug.Log("eres pobre");
+            return;
+        }
+
+        // Deduce el dinero del jugador
+        GameManager._instance.DeductMoney(price);
+
+        // Colocar el objeto si el jugador tiene suficiente dinero
+        int index = objectPlacer.PlaceObject(
+            database.objectsData[selectedObjectIndex].Prefab,
+            grid.CellToWorld(gridPosition)
+        );
+
+        GridData selectedData = furnitureData;
+        selectedData.AddObjectAt(
+            gridPosition,
             database.objectsData[selectedObjectIndex].Size,
             database.objectsData[selectedObjectIndex].ID,
-            index);
+            index
+        );
 
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false);
     }
+
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex) {
         GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ?
