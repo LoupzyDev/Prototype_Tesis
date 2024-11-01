@@ -23,17 +23,16 @@ public class NpcController : MonoBehaviour {
     private GameObject nearestFunObj;
     [SerializeField] private GameObject door;
 
-    private DeskController currentDesk; // Referencia al escritorio actual
-
+    private DeskController currentDesk;
     [SerializeField] private NpcTask npcTask;
 
-    // Referencia al ScriptableObject NpcsSO y al NPCData específico
+ 
     [SerializeField] private NpcsSO npcDataSO;
     private NPCData currentNpcData;
 
     public int npcIndex=0;
     public int hp;
-    public int stamina;
+    public float stamina;
     public int moral;
     public int happiness;
     public int speedTask ;
@@ -43,8 +42,6 @@ public class NpcController : MonoBehaviour {
 
     public int workLoad ;
     public int minWorkLoad ;
-
-
 
 
     private float timer = 0f;
@@ -218,7 +215,11 @@ public class NpcController : MonoBehaviour {
 
         float elapsedTime = 0f;
         while (elapsedTime < duration) {
-            elapsedTime += Time.deltaTime;
+            while (stamina <= 0) {
+                stamina += Time.deltaTime;
+            }
+
+            elapsedTime += Time.deltaTime * speedTask;
             npcTask.UpdateTimeBar(duration, elapsedTime);
             yield return null;
         }
@@ -226,7 +227,7 @@ public class NpcController : MonoBehaviour {
         ChangeGameState(NpcState.Walking);
     }
 
-    public int getStamina() {
+    public float getStamina() {
         return stamina;
     }
 }
