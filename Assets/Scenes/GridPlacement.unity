@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1425,10 +1425,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 699.3, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &221827929
 MonoBehaviour:
@@ -1443,7 +1443,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   task: {fileID: 0}
-  indexNpc: 3
 --- !u!114 &221827930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1966,7 +1965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcTask: {fileID: 643550457}
   npcDataSO: {fileID: 11400000, guid: 7bef640817f52e14fa5f5909cb10e318, type: 2}
-  npcIndex: 2
+  npcIndex: 0
   hp: 0
   stamina: 100
   moral: 0
@@ -1976,14 +1975,6 @@ MonoBehaviour:
   role: 
   workLoad: 0
   minWorkLoad: 0
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  typeNpc: 0
-  interval: 0.1
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 --- !u!195 &278321772
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4713,13 +4704,6 @@ MonoBehaviour:
   role: 
   workLoad: 0
   minWorkLoad: 0
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  typeNpc: 0
-  interval: 0.1
-=======
-=======
->>>>>>> Stashed changes
 --- !u!114 &641480507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4738,10 +4722,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   door: {fileID: 821839087}
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 --- !u!1 &643550456
 GameObject:
   m_ObjectHideFlags: 0
@@ -5555,14 +5535,6 @@ MonoBehaviour:
   role: 
   workLoad: 0
   minWorkLoad: 0
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  typeNpc: 0
-  interval: 0.1
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 --- !u!195 &747850918
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7849,10 +7821,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 519.3, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103550930
 MonoBehaviour:
@@ -7867,7 +7839,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   task: {fileID: 0}
-  indexNpc: 2
 --- !u!114 &1103550931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10225,10 +10196,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 339.3, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522270995
 MonoBehaviour:
@@ -10243,7 +10214,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   task: {fileID: 0}
-  indexNpc: 1
 --- !u!114 &1522270997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11299,7 +11269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcTask: {fileID: 738739844}
   npcDataSO: {fileID: 11400000, guid: 7bef640817f52e14fa5f5909cb10e318, type: 2}
-  npcIndex: 3
+  npcIndex: 0
   hp: 0
   stamina: 100
   moral: 0
@@ -11309,14 +11279,6 @@ MonoBehaviour:
   role: 
   workLoad: 0
   minWorkLoad: 0
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  typeNpc: 0
-  interval: 0.1
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 --- !u!195 &1660339181
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -13021,7 +12983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1895352454
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13928,10 +13890,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 379446484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 159.29999, y: -183}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141266214
 MonoBehaviour:
@@ -13946,7 +13908,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   task: {fileID: 0}
-  indexNpc: 0
 --- !u!114 &2141266216
 MonoBehaviour:
   m_ObjectHideFlags: 0

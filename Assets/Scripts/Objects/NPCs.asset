@@ -30,26 +30,6 @@ MonoBehaviour:
     Happiness: 100
     Speed: 2
     Quality: 100
-    Role: 1
-    WorkLoad: 0
-    MinWorkLoad: 2
-  - npcName: Fernanda
-    HP: 100
-    Stamina: 100
-    Moral: 100
-    Happiness: 100
-    Speed: 2
-    Quality: 100
-    Role: 2
-    WorkLoad: 0
-    MinWorkLoad: 2
-  - npcName: Diego
-    HP: 100
-    Stamina: 100
-    Moral: 100
-    Happiness: 100
-    Speed: 2
-    Quality: 100
     Role: 0
     WorkLoad: 0
     MinWorkLoad: 2

@@ -35,7 +35,7 @@ public class TaskManager : MonoBehaviour
     private void createTask(GameObject indexTask)
     {
         indexTask.SetActive(true);
-        indexTask.GetComponent<DragHandler>().timeTask = Random.Range(2, 10);
+        indexTask.GetComponent<DragHandler>().timeTask = Random.Range(1, 10);
 
         string randomName = names[Random.Range(0, names.Length)];
         string randomType = types[Random.Range(0, types.Length)];

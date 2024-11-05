@@ -6,15 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public static GameManager _instance;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    public List<NpcController> npcControllers;
-=======
     [SerializeField] private List<Npc> npcControllers;
->>>>>>> Stashed changes
-=======
-    [SerializeField] private List<Npc> npcControllers;
->>>>>>> Stashed changes
 
     [SerializeField] private DaySO daysDataSO;
     [SerializeField] private DayData currentDay;
