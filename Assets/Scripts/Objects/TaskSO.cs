@@ -5,7 +5,12 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "TasksData", menuName = "ScriptableObjects/TaskSO", order = 2)]
 public class TaskSO : ScriptableObject{
+
     public List<TaskData> TaskList;
+
+    public void ClearTasks() {
+        TaskList.Clear(); 
+    }
 }
 [Serializable]
 public class TaskData {
@@ -17,4 +22,7 @@ public class TaskData {
     public Type TypeTask;
 
     public float Time;
+
+    public bool IsAssigned = false;
+    public bool IsComplete = false;
 }

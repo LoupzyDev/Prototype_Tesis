@@ -42,7 +42,7 @@ public class NpcSelectionManager : MonoBehaviour{
                     
             }
         }
-        if (Input.GetMouseButtonDown(1) && npcsSelect.Count > 0) {
+        if (Input.GetMouseButtonDown(1) && npcsSelect.Count == 1) {
 
             RaycastHit hit;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);

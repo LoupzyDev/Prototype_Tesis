@@ -13,8 +13,21 @@ MonoBehaviour:
   m_Name: Tasks
   m_EditorClassIdentifier: 
   TaskList:
-  - Name: 
-    Description: 
-    TypeTask: 0
-    Personal: []
-    Time: 0
+  - Name: "Programa una mec\xE1nica"
+    Description: "Hazlo r\xE1pido"
+    TypeTask: 2
+    Time: 8.2106285
+    IsAssigned: 0
+    IsComplete: 0
+  - Name: "Dise\xF1a el UI"
+    Description: Trabaja
+    TypeTask: 2
+    Time: 8.140164
+    IsAssigned: 0
+    IsComplete: 0
+  - Name: "Programa una mec\xE1nica"
+    Description: Trabaja sin pago
+    TypeTask: 1
+    Time: 1.0164924
+    IsAssigned: 1
+    IsComplete: 1

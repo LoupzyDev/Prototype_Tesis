@@ -31,20 +31,16 @@ public class GameManager : MonoBehaviour {
         UpdateAllFurniturePrices();
     }
 
-    public void StartNpcTask(int npcIndex, float duration, NpcState taskState) {
-        npcControllers[npcIndex].StartTask(duration, taskState);
-    }
 
-   
     public void SetAllNpcsToSleeping() {
         foreach (Npc npcController in npcControllers) {
-            npcController.ChangeGameState(NpcState.Sleeping); // Cambia el estado a Sleeping
+            npcController.ChangeGameState(NpcState.Sleeping); 
         }
     }
     public void SetAllNpcsToWakeUp() {
         foreach (Npc npcController in npcControllers) {
             npcController.gameObject.SetActive(true);
-            npcController.ChangeGameState(NpcState.Walking); // Cambia el estado a Walking
+            npcController.ChangeGameState(NpcState.Walking); 
         }
     }
    
@@ -54,8 +50,7 @@ public class GameManager : MonoBehaviour {
         numberOfTasks_GM=currentDay.numberOfTasks;
         minQuality_GM=currentDay.minQuality;
 
-        taskManager.DeactivateAllTasks();
-        taskManager.addTasks(dayIndex + 1,numberOfTasks_GM, minQuality_GM);
+        taskManager.AddTasks(dayIndex + 1,numberOfTasks_GM, minQuality_GM);
     }
 
     public bool CanAfford(int amount) {
@@ -67,7 +62,7 @@ public class GameManager : MonoBehaviour {
         UpdateMoneyUI();
     }
     public void UpdateMoneyUI() {
-        moneyText.text = $"Dinero: {playerMoney} Mxn"; // Actualiza el texto en el Canvas
+        moneyText.text = $"Dinero: {playerMoney} Mxn"; 
     }
     public void UpdateAllFurniturePrices() {
         for (int i = 0; i < furniturePriceTMPList.Count; i++) {

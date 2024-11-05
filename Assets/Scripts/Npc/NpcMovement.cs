@@ -32,4 +32,10 @@ public class NpcMovement : MonoBehaviour
     void goToDoor() {
         agent.SetDestination(door.transform.position);
     }
+
+    public void GoToSpecificObject(GameObject desk) {
+        if (desk != null) {
+            agent.SetDestination(desk.transform.position);
+        }
+    }
 }
