@@ -9,10 +9,10 @@ public class CanvasManager : MonoBehaviour {
     [SerializeField] private GameObject buttonsGameplay;
 
     // Referencias a los NPCs
-    [SerializeField] private NpcController npc1;
-    [SerializeField] private NpcController npc2;
-    [SerializeField] private NpcController npc3;
-    [SerializeField] private NpcController npc4;
+    [SerializeField] private Npc npc1;
+    [SerializeField] private Npc npc2;
+    [SerializeField] private Npc npc3;
+    [SerializeField] private Npc npc4;
 
 
     public void turnOffContructionMenu() {

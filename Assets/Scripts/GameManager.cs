@@ -6,7 +6,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public static GameManager _instance;
+<<<<<<< Updated upstream
     public List<NpcController> npcControllers;
+=======
+    [SerializeField] private List<Npc> npcControllers;
+>>>>>>> Stashed changes
 
     [SerializeField] private DaySO daysDataSO;
     [SerializeField] private DayData currentDay;
@@ -37,12 +41,12 @@ public class GameManager : MonoBehaviour {
 
    
     public void SetAllNpcsToSleeping() {
-        foreach (NpcController npcController in npcControllers) {
+        foreach (Npc npcController in npcControllers) {
             npcController.ChangeGameState(NpcState.Sleeping); // Cambia el estado a Sleeping
         }
     }
     public void SetAllNpcsToWakeUp() {
-        foreach (NpcController npcController in npcControllers) {
+        foreach (Npc npcController in npcControllers) {
             npcController.gameObject.SetActive(true);
             npcController.ChangeGameState(NpcState.Walking); // Cambia el estado a Walking
         }
