@@ -1977,8 +1977,11 @@ MonoBehaviour:
   workLoad: 0
   minWorkLoad: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   typeNpc: 0
   interval: 0.1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!195 &278321772
@@ -4711,9 +4714,12 @@ MonoBehaviour:
   workLoad: 0
   minWorkLoad: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   typeNpc: 0
   interval: 0.1
 =======
+=======
+>>>>>>> Stashed changes
 --- !u!114 &641480507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4732,6 +4738,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   door: {fileID: 821839087}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1 &643550456
 GameObject:
@@ -5547,8 +5556,11 @@ MonoBehaviour:
   workLoad: 0
   minWorkLoad: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   typeNpc: 0
   interval: 0.1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!195 &747850918
@@ -11298,8 +11310,11 @@ MonoBehaviour:
   workLoad: 0
   minWorkLoad: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   typeNpc: 0
   interval: 0.1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!195 &1660339181
