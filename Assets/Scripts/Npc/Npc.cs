@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
 
 public enum NpcState {
     None,
@@ -13,14 +13,17 @@ public enum NpcState {
 
 public class Npc : MonoBehaviour {
 
+
     private NpcState state;
 
     private TaskData taskData;
 
-    [SerializeField] private NpcTask npcTaskUI;
+    private NPCData currentNpcData;
 
     [SerializeField] private NpcsSO npcDataSO;
-    private NPCData currentNpcData;
+
+    [Header("Propiedades")]
+    [Space(10)]
 
     public int npcIndex = 0;
     public int hp;
@@ -29,22 +32,37 @@ public class Npc : MonoBehaviour {
     public int happiness;
     public int speedTask;
     public int quality;
-
     public string role;
 
     public int workLoad;
     public int minWorkLoad;
 
-    GameObject actuallyDesk;
+    [Header("Objetos")]
+    [Space(10)]
 
+    GameObject actuallyDesk;
     NpcSelectionManager selectionManager;
+
+    [Header("Ui")]
+    [Space(10)]
+
+    [SerializeField] private Image _imageState;
+    [SerializeField] private Canvas _npcCanvas;
+    [SerializeField] private Camera _mainCamera;
+    [SerializeField] private List<Sprite> _imageSprite;
+    public Npc() { }
     private void Awake() {
         InitializeNpc();
     }
     private void Start() {
         NpcSelectionManager._instance.allNpcList.Add(gameObject);
+        _imageState.color = new Color(0, 0, 0, 0);
     }
 
+    private void Update()
+    {
+        _npcCanvas.transform.rotation=_mainCamera.transform.rotation;
+    }
 
     private void InitializeNpc() {
 
@@ -74,9 +92,13 @@ public class Npc : MonoBehaviour {
             case NpcState.Playing:
                 break;
             case NpcState.Working:
+                _imageState.sprite= _imageSprite[0];
+                _imageState.color = new Color(0, 0, 0, 1);
                 StartCoroutine(WorkingRoutine()); // Comienza el trabajo en la tarea
                 break;
             case NpcState.Walking:
+                _imageState.color = new Color(0, 0, 0, 1);
+                _imageState.sprite = _imageSprite[1];
                 break;
             case NpcState.Sleeping:
                 break;
