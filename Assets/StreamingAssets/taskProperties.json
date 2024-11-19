@@ -1,0 +1,42 @@
+{
+  "names": [
+    "Programa una mecánica",
+    "Diseña el UI",
+    "Crea el mapa del mundo",
+    "Optimiza el código",
+    "Corrige errores en el sistema",
+    "Implementa la física del juego",
+    "Modela un personaje en 3D",
+    "Crea efectos visuales",
+    "Escribe diálogos para los NPCs",
+    "Diseña niveles",
+    "Realiza pruebas de juego",
+    "Implementa sonidos ambientales",
+    "Crea animaciones de combate",
+    "Optimiza la inteligencia artificial"
+  ],
+  "types": [
+    "Programmer",
+    "Artist",
+    "Designer",
+    "Tester",
+    "SoundEngineer"
+  ],
+  "descriptions": [
+    "Completa esta tarea asegurándote de que el resultado final sea funcional, atractivo y sin errores evidentes.",
+    "Prioriza la velocidad de desarrollo, pero sin comprometer la calidad del producto entregado.",
+    "Requiere un nivel de atención al detalle excepcional para garantizar que el trabajo cumpla con altos estándares.",
+    "Alta prioridad: esta tarea debe completarse antes de otras para evitar retrasos en el proyecto.",
+    "Trabaja en colaboración con otros miembros del equipo para garantizar que esta tarea se integre perfectamente.",
+    "Asegúrate de que esta tarea sea compatible con los sistemas operativos y plataformas previstas.",
+    "Entrega esta tarea antes del plazo establecido para mantener el flujo de trabajo del equipo.",
+    "Usa las mejores prácticas de desarrollo durante todo el proceso para garantizar un trabajo limpio y eficiente.",
+    "Requiere investigación adicional para garantizar que se implementen las soluciones más efectivas y avanzadas.",
+    "Antes de iniciar esta tarea, revisa el feedback recibido para alinear tu enfoque con las expectativas del proyecto.",
+    "Evita errores críticos durante la ejecución de esta tarea para prevenir problemas graves más adelante.",
+    "Sigue cuidadosamente las especificaciones proporcionadas por el cliente para satisfacer sus necesidades.",
+    "Añade creatividad y originalidad al diseño mientras sigues las directrices establecidas.",
+    "Céntrate en optimizar el uso de recursos como memoria y procesamiento para mantener un rendimiento óptimo.",
+    "Realiza pruebas exhaustivas antes de entregar el resultado final para garantizar calidad y funcionalidad."
+  ]
+}

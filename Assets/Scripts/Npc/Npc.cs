@@ -94,11 +94,11 @@ public class Npc : MonoBehaviour {
                 break;
             case NpcState.Working:
                 _imageState.sprite= _imageSprite[0];
-                _imageState.color = new Color(0, 0, 0, 1);
+                SetColor(91f, 91f, 91f);
                 StartCoroutine(WorkingRoutine()); // Comienza el trabajo en la tarea
                 break;
             case NpcState.Walking:
-                _imageState.color = new Color(0, 0, 0, 1);
+                SetColor(91f, 91f, 91f);
                 _imageState.sprite = _imageSprite[1];
                 break;
             case NpcState.Sleeping:
@@ -146,4 +146,8 @@ public class Npc : MonoBehaviour {
             }
         }
     }
+    void SetColor(float r, float g, float b) {
+        _imageState.color = new Color(r / 255f, g / 255f, b / 255f, 1f);
+    }
+
 }

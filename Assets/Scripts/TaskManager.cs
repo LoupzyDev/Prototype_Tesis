@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class TaskManager : MonoBehaviour {
     public static TaskManager _instance;
@@ -8,9 +9,20 @@ public class TaskManager : MonoBehaviour {
     [SerializeField] private TaskSO taskData; // Scriptable Object que contiene la lista de tareas
     [SerializeField] private GameObject[] gameObjsTask; // Array de objetos de tareas
 
+    private TaskJsonData taskJsonData;
+
     private void Awake() {
         _instance = this;
+        LoadTaskDataFromJson();
         ClearTaskList(); // Limpia la lista de tareas al iniciar
+    }
+
+    private void LoadTaskDataFromJson() {
+        string filePath = Path.Combine(Application.streamingAssetsPath, "taskProperties.json");
+        string jsonContent = File.ReadAllText(filePath);
+        taskJsonData = JsonUtility.FromJson<TaskJsonData>(jsonContent);
+
+
     }
 
     public void AddTasks(int actualDay, int numTask, float minQlty) {
@@ -38,12 +50,13 @@ public class TaskManager : MonoBehaviour {
     }
 
     private void CreateTask(GameObject indexTask) {
+
         indexTask.SetActive(true);
         float randomTime = Random.Range(1f, 10f);
 
-        string randomName = GetRandomName();
-        TaskData.Type randomType = GetRandomType();
-        string randomDescription = GetRandomDescription();
+        string randomName = GetRandomFromList(taskJsonData.names);
+        TaskData.Type randomType = GetRandomFromEnum<TaskData.Type>();
+        string randomDescription = GetRandomFromList(taskJsonData.descriptions);
 
         Task taskObject = indexTask.GetComponent<Task>();
         taskObject.timeTask = randomTime;
@@ -63,22 +76,23 @@ public class TaskManager : MonoBehaviour {
         taskData.TaskList.Add(newTask);
     }
 
-    private string GetRandomName() {
-        string[] names = new string[] { "Programa una mecánica", "Diseña el UI", "Crea el mapa del mundo" };
-        return names[Random.Range(0, names.Length)];
+    private string GetRandomFromList(List<string> list) {
+        return list[Random.Range(0, list.Count)];
     }
 
-    private TaskData.Type GetRandomType() {
-        TaskData.Type[] types = (TaskData.Type[])System.Enum.GetValues(typeof(TaskData.Type));
-        return types[Random.Range(0, types.Length)];
-    }
-
-    private string GetRandomDescription() {
-        string[] descriptions = new string[] { "Trabaja", "Trabaja sin pago", "Hazlo rápido" };
-        return descriptions[Random.Range(0, descriptions.Length)];
+    private T GetRandomFromEnum<T>() {
+        T[] values = (T[])System.Enum.GetValues(typeof(T));
+        return values[Random.Range(0, values.Length)];
     }
 
     public void ClearTaskList() {
         taskData.ClearTasks(); // Llama al método de TaskSO para limpiar la lista
     }
+}
+
+[System.Serializable]
+public class TaskJsonData {
+    public List<string> names;
+    public List<string> types;
+    public List<string> descriptions;
 }
