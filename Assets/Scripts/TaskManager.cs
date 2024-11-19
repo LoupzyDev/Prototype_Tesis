@@ -45,11 +45,11 @@ public class TaskManager : MonoBehaviour {
         TaskData.Type randomType = GetRandomType();
         string randomDescription = GetRandomDescription();
 
-        Task dragHandler = indexTask.GetComponent<Task>();
-        dragHandler.timeTask = randomTime;
-        dragHandler.nameTask = randomName;
-        dragHandler.typeTask = randomType.ToString();
-        dragHandler.descriptionTask = randomDescription;
+        Task taskObject = indexTask.GetComponent<Task>();
+        taskObject.timeTask = randomTime;
+        taskObject.nameTask = randomName;
+        taskObject.typeTask = randomType.ToString();
+        taskObject.descriptionTask = randomDescription;
 
         TaskData newTask = new TaskData {
             Name = randomName,

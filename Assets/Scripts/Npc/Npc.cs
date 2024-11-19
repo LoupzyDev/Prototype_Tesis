@@ -57,6 +57,7 @@ public class Npc : MonoBehaviour {
     private void Start() {
         NpcSelectionManager._instance.allNpcList.Add(gameObject);
         _imageState.color = new Color(0, 0, 0, 0);
+        ChangeGameState(NpcState.Walking);
     }
 
     private void Update()
