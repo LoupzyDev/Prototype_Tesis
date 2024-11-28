@@ -23,7 +23,7 @@ MonoBehaviour:
     Role: 0
     WorkLoad: 0
     MinWorkLoad: 2
-  - npcName: Montse
+  - npcName: Daniela
     HP: 100
     Stamina: 100
     Moral: 100
@@ -43,7 +43,7 @@ MonoBehaviour:
     Role: 2
     WorkLoad: 0
     MinWorkLoad: 2
-  - npcName: Diego
+  - npcName: Lisseth
     HP: 100
     Stamina: 100
     Moral: 100

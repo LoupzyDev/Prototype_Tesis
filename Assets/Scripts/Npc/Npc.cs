@@ -56,7 +56,6 @@ public class Npc : MonoBehaviour {
     }
     private void Start() {
         NpcSelectionManager._instance.allNpcList.Add(gameObject);
-        _imageState.color = new Color(0, 0, 0, 0);
         ChangeGameState(NpcState.Walking);
     }
 
@@ -94,11 +93,9 @@ public class Npc : MonoBehaviour {
                 break;
             case NpcState.Working:
                 _imageState.sprite= _imageSprite[0];
-                SetColor(91f, 91f, 91f);
                 StartCoroutine(WorkingRoutine()); // Comienza el trabajo en la tarea
                 break;
             case NpcState.Walking:
-                SetColor(91f, 91f, 91f);
                 _imageState.sprite = _imageSprite[1];
                 break;
             case NpcState.Sleeping:

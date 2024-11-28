@@ -5,33 +5,41 @@ using TMPro;
 
 public class CanvasManager : MonoBehaviour {
     [SerializeField] private GameObject contructionMenu;
-    [SerializeField] private GameObject taskMenu;
+    [SerializeField] private GameObject pcMenu;
     [SerializeField] private GameObject buttonsGameplay;
+    [SerializeField] private GameObject stadisticsMenu;
+    [SerializeField] private GameObject taskMenu;
 
-    // Referencias a los NPCs
-    [SerializeField] private Npc npc1;
-    [SerializeField] private Npc npc2;
-    [SerializeField] private Npc npc3;
-    [SerializeField] private Npc npc4;
 
+    public void turnPanels(GameObject panelTrue, GameObject panelFalse) { 
+        panelTrue.SetActive(true);
+        panelFalse.SetActive(false);
+    }
 
     public void turnOffContructionMenu() {
-        contructionMenu.gameObject.SetActive(false);
-        buttonsGameplay.gameObject.SetActive(true);
+
+        turnPanels(buttonsGameplay,contructionMenu);
     }
 
     public void turnOnContructionMenu() {
-        contructionMenu.gameObject.SetActive(true);
-        buttonsGameplay.gameObject.SetActive(false);
+
+        turnPanels(contructionMenu,buttonsGameplay);
     }
 
-    public void turnOffTaskMenu() {
-        taskMenu.gameObject.SetActive(false);
-        buttonsGameplay.gameObject.SetActive(true);
+    public void turnOffpcMenu() {
+
+        turnPanels(buttonsGameplay,pcMenu);
+    }
+
+    public void turnOnpcMenu() {
+
+        turnPanels(pcMenu, buttonsGameplay);
     }
 
     public void turnOnTaskMenu() {
-        taskMenu.gameObject.SetActive(true);
-        buttonsGameplay.gameObject.SetActive(false);
+        turnPanels(taskMenu,stadisticsMenu);
+    }
+    public void turnOnStadisitcsMenu() {
+        turnPanels(stadisticsMenu, taskMenu);
     }
 }
