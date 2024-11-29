@@ -12,7 +12,7 @@ public class Clock : MonoBehaviour {
     public bool isNigth=false;
 
     public int today ;
-
+    [SerializeField] private GameObject door;
     void Start() {
         GameManager._instance.updateTask(today);
     }
@@ -37,9 +37,11 @@ public class Clock : MonoBehaviour {
         if(horas == 22 && !isNigth) {
             GameManager._instance.SetAllNpcsToSleeping();
             isNigth = true;
+            door.GetComponent<Collider>().enabled = true;
         }
         if (horas == 7 && isNigth) {
             isNigth = false;
+            door.GetComponent<Collider>().enabled = false;
             GameManager._instance.SetAllNpcsToWakeUp();
         }
         AjustarIntensidadDeLuz();

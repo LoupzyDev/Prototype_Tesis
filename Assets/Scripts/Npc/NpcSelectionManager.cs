@@ -73,7 +73,7 @@ public class NpcSelectionManager : MonoBehaviour{
         }
     }
 
-    private void DeselectAll() {
+    public void DeselectAll() {
 
         foreach (var npc in npcsSelect) {
             EnableNpcMovement(npc, false);

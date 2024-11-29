@@ -50,7 +50,8 @@ public class GameManager : MonoBehaviour {
         numberOfTasks_GM=currentDay.numberOfTasks;
         minQuality_GM=currentDay.minQuality;
 
-        taskManager.AddTasks(dayIndex + 1,numberOfTasks_GM, minQuality_GM);
+        TaskManager._instance.StartAddingTasks(dayIndex + 1, numberOfTasks_GM, minQuality_GM);
+
     }
 
     public bool CanAfford(int amount) {

@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: DataBase
   m_EditorClassIdentifier: 
   objectsData:
-  - <Name>k__BackingField: ArcadeMachine
+  - <Name>k__BackingField: Chair
     <ID>k__BackingField: 0
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 5237576275740120950, guid: d84256c4ae2df2048b222ffc71dbc1ba, type: 3}
     Price: 10
-  - <Name>k__BackingField: BasquetBallGame
+  - <Name>k__BackingField: Desk
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 2}
     <Prefab>k__BackingField: {fileID: 1816944350554106125, guid: 780933818b071734aa284a9551f98993, type: 3}
     Price: 30
-  - <Name>k__BackingField: Prizes
+  - <Name>k__BackingField: Laptop
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 2, y: 1}
     <Prefab>k__BackingField: {fileID: 4717594706695113732, guid: b4ec9ffde0a0d944ebceb00771c1113b, type: 3}

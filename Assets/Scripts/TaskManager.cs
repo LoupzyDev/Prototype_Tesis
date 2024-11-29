@@ -11,6 +11,9 @@ public class TaskManager : MonoBehaviour {
 
     private TaskJsonData taskJsonData;
 
+    [SerializeField] private int maxDailyTasks; // Número máximo de tareas por día
+    private int currentTaskCount = 0; // Contador de tareas creadas
+
     private void Awake() {
         _instance = this;
         LoadTaskDataFromJson();
@@ -21,15 +24,22 @@ public class TaskManager : MonoBehaviour {
         string filePath = Path.Combine(Application.streamingAssetsPath, "taskProperties.json");
         string jsonContent = File.ReadAllText(filePath);
         taskJsonData = JsonUtility.FromJson<TaskJsonData>(jsonContent);
-
-
     }
 
-    public void AddTasks(int actualDay, int numTask, float minQlty) {
-        for (int i = 0; i < numTask && i < gameObjsTask.Length; i++) {
-            GameObject taskObject = gameObjsTask[i];
+    public void StartAddingTasks(int actualDay,int numOfTask ,float minQlty) {
+        StartCoroutine(AddTasksPeriodically(actualDay, numOfTask, minQlty));
+    }
+
+    private IEnumerator AddTasksPeriodically(int actualDay, int numTask, float minQlty) {
+        currentTaskCount = 0;
+
+        while (currentTaskCount < numTask && currentTaskCount < gameObjsTask.Length) {
+            GameObject taskObject = gameObjsTask[currentTaskCount];
             CreateTask(taskObject);
             taskObject.GetComponent<Task>().UpdateTaskUI();
+            currentTaskCount++;
+
+            yield return new WaitForSeconds(5f); // Espera 5 segundos antes de añadir otra tarea
         }
     }
 
@@ -50,7 +60,6 @@ public class TaskManager : MonoBehaviour {
     }
 
     private void CreateTask(GameObject indexTask) {
-
         indexTask.SetActive(true);
         float randomTime = Random.Range(1f, 10f);
 

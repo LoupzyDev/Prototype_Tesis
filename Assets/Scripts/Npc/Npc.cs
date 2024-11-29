@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public enum NpcState {
@@ -26,10 +27,10 @@ public class Npc : MonoBehaviour {
     [Space(10)]
 
     public int npcIndex = 0;
-    public int hp;
-    public int stamina;
-    public int moral;
-    public int happiness;
+    public float hp;
+    public float stamina;
+    public float moral;
+    public float happiness;
     public int speedTask;
     public int quality;
     public string role;
@@ -50,6 +51,10 @@ public class Npc : MonoBehaviour {
     [SerializeField] private Canvas _npcCanvas;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private List<Sprite> _imageSprite;
+
+    public NpcMovement npcMovement;
+    
+
     public Npc() { }
     private void Awake() {
         InitializeNpc();
@@ -62,6 +67,19 @@ public class Npc : MonoBehaviour {
     private void Update()
     {
         _npcCanvas.transform.rotation=_mainCamera.transform.rotation;
+
+        if (state == NpcState.Working) {
+            stamina -= Time.deltaTime * 6;
+            stamina = Mathf.Clamp(stamina, 0, 100);
+        }
+        if(state == NpcState.Playing) {
+            stamina += Time.deltaTime * 3;
+            stamina = Mathf.Clamp(stamina, 0, 100);
+        }
+
+        if (npcMovement.CheckDistance() && state == NpcState.Walking) {
+            ChangeGameState(NpcState.None);
+        }
     }
 
     private void InitializeNpc() {
@@ -90,6 +108,7 @@ public class Npc : MonoBehaviour {
             case NpcState.None:
                 break;
             case NpcState.Playing:
+                _imageState.sprite = _imageSprite[2];
                 break;
             case NpcState.Working:
                 _imageState.sprite= _imageSprite[0];
@@ -97,11 +116,15 @@ public class Npc : MonoBehaviour {
                 break;
             case NpcState.Walking:
                 _imageState.sprite = _imageSprite[1];
+                npcMovement.GoToPosition(npcMovement.initialPosition);
                 break;
             case NpcState.Sleeping:
+                _imageState.sprite = _imageSprite[3];
+                npcMovement.goToDoor();
                 break;
         }
     }
+
     private IEnumerator WorkingRoutine() {
         if (taskData != null) {
             taskData.IsAssigned = true; // Marcar como asignada
@@ -116,7 +139,6 @@ public class Npc : MonoBehaviour {
             taskData.IsComplete = true; // Marcar como completada
             ChangeGameState(NpcState.Walking);
             Debug.Log("Acabé el trabajo en: " + taskData.Name);
-            GetComponent<NpcMovement>().enabled = true;
         }
     }
 
@@ -132,7 +154,8 @@ public class Npc : MonoBehaviour {
                     // Asignar la tarea al NPC
                     taskData = task; // Guardamos la tarea en el NPC
                     ChangeGameState(NpcState.Working);
-                    GetComponent<NpcMovement>().enabled = false;
+                    NpcSelectionManager._instance.DeselectAll();
+                    //GetComponent<NpcMovement>().enabled = false;
                     Debug.Log("NPC ha reservado el escritorio y ha comenzado a trabajar en: " + task.Name);
                 } else {
                     Debug.Log("No hay tareas disponibles para el rol de este NPC.");
@@ -142,7 +165,17 @@ public class Npc : MonoBehaviour {
                 Debug.Log("El escritorio ya está ocupado. El NPC no puede comenzar a trabajar.");
             }
         }
+        if (collision.gameObject.CompareTag("Fun")) {
+            state = NpcState.Playing;
+        }
     }
+
+    private void OnCollisionExit(Collision collision) {
+        if (collision.gameObject.CompareTag("Fun")) {
+            state = NpcState.Walking;
+        }
+    }
+
     void SetColor(float r, float g, float b) {
         _imageState.color = new Color(r / 255f, g / 255f, b / 255f, 1f);
     }

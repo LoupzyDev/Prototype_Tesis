@@ -50,7 +50,7 @@ public class NpcDisplay : MonoBehaviour {
 
         npcNames[i].text = npcList[i].name;
     }
-    private void CheckAndChangeBarColor(Image bar, int currentValue) {
+    private void CheckAndChangeBarColor(Image bar, float currentValue) {
         if (currentValue < 50) {
             bar.color = redColor;
         }
@@ -62,10 +62,10 @@ public class NpcDisplay : MonoBehaviour {
     }
     private void UpdateAllBars(int i) {
 
-        int hpActualValue = npcList[i].GetComponent<Npc>().hp;
-        int staminaActualValue = npcList[i].GetComponent<Npc>().stamina;
-        int moralActualValue = npcList[i].GetComponent<Npc>().moral;
-        int happinessActualValue = npcList[i].GetComponent<Npc>().happiness;
+        float hpActualValue = npcList[i].GetComponent<Npc>().hp;
+        float staminaActualValue = npcList[i].GetComponent<Npc>().stamina;
+        float moralActualValue = npcList[i].GetComponent<Npc>().moral;
+        float happinessActualValue = npcList[i].GetComponent<Npc>().happiness;
 
         UpdateBar(npcBarHps[i], hpActualValue, 100);
         UpdateBar(npcBarStamins[i], staminaActualValue, 100);
