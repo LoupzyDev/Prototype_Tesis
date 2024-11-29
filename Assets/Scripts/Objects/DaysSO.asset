@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DaysSO
   m_EditorClassIdentifier: 
   days:
-  - numberOfTasks: 10
+  - numberOfTasks: 6
     minQuality: 66
-  - numberOfTasks: 15
-    minQuality: 3
+  - numberOfTasks: 7
+    minQuality: 66
   - numberOfTasks: 3
     minQuality: 3
   - numberOfTasks: 4

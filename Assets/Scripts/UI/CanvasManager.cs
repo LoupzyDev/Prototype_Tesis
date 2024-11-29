@@ -64,9 +64,13 @@ public class CanvasManager : MonoBehaviour {
     public void turnOffPauseMenu() {
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f; // Reanuda el juego
+        buttonsGameplay.SetActive(true);
     }
     public void RestartScene() {
         Time.timeScale = 1.0f; // Asegúrate de reanudar el tiempo antes de reiniciar
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void QuitGame() {
+        Application.Quit();
     }
 }
