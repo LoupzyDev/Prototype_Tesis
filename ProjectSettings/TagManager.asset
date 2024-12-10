@@ -6,15 +6,20 @@ TagManager:
   tags:
   - Wall
   - Work
+  - Fun
+  - Npc
+  - Occupied
+  - DragParent
+  - Door
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Placement
   - Water
   - UI
-  - 
-  - 
+  - Ground
+  - Clickable
   - 
   - 
   - 
