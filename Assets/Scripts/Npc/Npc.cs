@@ -137,6 +137,7 @@ public class Npc : MonoBehaviour {
                 actuallyDesk = null;
             }
             taskData.IsComplete = true; // Marcar como completada
+            TaskManager._instance.RemoveCompletedTasks();
             ChangeGameState(NpcState.Walking);
             Debug.Log("Acabé el trabajo en: " + taskData.Name);
         }
@@ -166,13 +167,14 @@ public class Npc : MonoBehaviour {
             }
         }
         if (collision.gameObject.CompareTag("Fun")) {
-            state = NpcState.Playing;
+            ChangeGameState(NpcState.Playing);
+
         }
     }
 
     private void OnCollisionExit(Collision collision) {
         if (collision.gameObject.CompareTag("Fun")) {
-            state = NpcState.Walking;
+            ChangeGameState(NpcState.Walking);
         }
     }
 

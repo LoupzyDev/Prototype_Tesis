@@ -8,7 +8,7 @@ public class DoorManager : MonoBehaviour
 
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Npc") && clock.isNigth) {
+        if (other.gameObject.CompareTag("Npc") && clock.isNight) {
             other.gameObject.SetActive(false);
         }
     }

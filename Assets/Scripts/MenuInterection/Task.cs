@@ -1,12 +1,9 @@
 using TMPro;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Task : MonoBehaviour {
-
     public string nameTask;
+    public int index;
     public string descriptionTask;
     public string typeTask;
     public float timeTask;
@@ -21,7 +18,18 @@ public class Task : MonoBehaviour {
         taskTypeUI.text = typeTask;
     }
 
-    public void showDescription() {
+    private void Update() {
+
+        if (!TaskManager._instance.taskData.TaskList.Exists(task => task.index == index)) {
+            gameObject.SetActive(false); 
+        }
+    }
+
+    public void ShowDescription() {
         taskDescriptionUI.text = descriptionTask;
     }
 }
+
+
+
+

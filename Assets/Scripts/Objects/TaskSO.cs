@@ -14,15 +14,12 @@ public class TaskSO : ScriptableObject{
 }
 [Serializable]
 public class TaskData {
+    public int index;
     public string Name;
-
     public string Description;
-
     public enum Type { Programmer, Artist, Designer }
     public Type TypeTask;
-
     public float Time;
-
     public bool IsAssigned = false;
     public bool IsComplete = false;
 }

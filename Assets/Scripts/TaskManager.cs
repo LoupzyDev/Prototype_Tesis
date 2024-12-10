@@ -6,7 +6,7 @@ using System.IO;
 public class TaskManager : MonoBehaviour {
     public static TaskManager _instance;
 
-    [SerializeField] private TaskSO taskData; // Scriptable Object que contiene la lista de tareas
+    public TaskSO taskData; // Scriptable Object que contiene la lista de tareas
     [SerializeField] private GameObject[] gameObjsTask; // Array de objetos de tareas
 
     private TaskJsonData taskJsonData;
@@ -17,7 +17,7 @@ public class TaskManager : MonoBehaviour {
     private void Awake() {
         _instance = this;
         LoadTaskDataFromJson();
-        ClearTaskList(); // Limpia la lista de tareas al iniciar
+        ClearTaskList(); 
     }
 
     private void LoadTaskDataFromJson() {
@@ -35,11 +35,11 @@ public class TaskManager : MonoBehaviour {
 
         while (currentTaskCount < numTask && currentTaskCount < gameObjsTask.Length) {
             GameObject taskObject = gameObjsTask[currentTaskCount];
-            CreateTask(taskObject);
+            CreateTask(taskObject,currentTaskCount);
             taskObject.GetComponent<Task>().UpdateTaskUI();
             currentTaskCount++;
 
-            yield return new WaitForSeconds(5f); // Espera 5 segundos antes de añadir otra tarea
+            yield return new WaitForSeconds(5f); 
         }
     }
 
@@ -59,7 +59,7 @@ public class TaskManager : MonoBehaviour {
         return null;
     }
 
-    private void CreateTask(GameObject indexTask) {
+    private void CreateTask(GameObject indexTask,int currentIndex) {
         indexTask.SetActive(true);
         float randomTime = Random.Range(1f, 10f);
 
@@ -69,12 +69,14 @@ public class TaskManager : MonoBehaviour {
 
         Task taskObject = indexTask.GetComponent<Task>();
         taskObject.timeTask = randomTime;
+        taskObject.index = currentIndex;
         taskObject.nameTask = randomName;
         taskObject.typeTask = randomType.ToString();
         taskObject.descriptionTask = randomDescription;
 
         TaskData newTask = new TaskData {
             Name = randomName,
+            index=currentIndex,
             TypeTask = randomType,
             Time = randomTime,
             Description = randomDescription,
@@ -95,8 +97,22 @@ public class TaskManager : MonoBehaviour {
     }
 
     public void ClearTaskList() {
-        taskData.ClearTasks(); // Llama al método de TaskSO para limpiar la lista
+        taskData.ClearTasks(); 
     }
+    public void RemoveCompletedTasks() {
+        for (int i = taskData.TaskList.Count - 1; i >= 0; i--) {
+            if (taskData.TaskList[i].IsComplete) {
+                GameObject taskObject = gameObjsTask[i];
+                if (taskObject != null) {
+                    taskObject.SetActive(false);
+                }
+                taskData.TaskList.RemoveAt(i);
+            }
+        }
+    }
+
+
+
 }
 
 [System.Serializable]
