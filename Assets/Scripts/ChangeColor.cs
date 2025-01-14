@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -6,6 +7,7 @@ public class ChangeColor : MonoBehaviour {
 
     public Volume componentVolume;
     private ColorAdjustments colorAdjustments;
+    private ColorCurves colorCurves;
     private Vignette vignette;
 
     public float transitionSpeed = 1f;
@@ -13,6 +15,7 @@ public class ChangeColor : MonoBehaviour {
     private float currentSaturation;
 
     private bool toggle = true;
+    //public List<Keyframe> curveKeyframe;
 
     [Range(0, 100)]
     [SerializeField] float volumeSaturation;
@@ -32,19 +35,27 @@ public class ChangeColor : MonoBehaviour {
         if (componentVolume.profile.TryGet(out vignette)) {
             vignette.intensity.value = 0f;
         }
+        if (componentVolume.profile.TryGet(out colorCurves))
+        {
+            colorCurves.hueVsSat.value.AddKey(.704f, 0f);
+            colorCurves.hueVsSat.value.AddKey(.767f, 1f);
+            colorCurves.hueVsSat.value.AddKey(.841f, 0f);
+        }
     }
 
     private void Update() {
-        
+
+
         currentSaturation = Mathf.Lerp(currentSaturation, targetSaturation, transitionSpeed * Time.deltaTime);
         colorAdjustments.saturation.value = currentSaturation;
 
         if (Input.GetKeyDown(KeyCode.V)) {
             if (toggle) {
-                targetSaturation = colorlessovolumeSaturation;
+                //targetSaturation = colorlessovolumeSaturation;
                 StartCoroutine(AdjustVignetteIntensity(vignetteIntensity));
+
             } else {
-                targetSaturation = volumeSaturation;
+                //targetSaturation = volumeSaturation;
                 StartCoroutine(AdjustVignetteIntensity(0f));
             }
             toggle = !toggle;

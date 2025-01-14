@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4069,6 +4069,7 @@ MonoBehaviour:
   NpcMaterial: {fileID: 2100000, guid: c8d699469bb59ed43addf6538ac3f44f, type: 2}
   colorlessColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   transitionSpeed: 2
+  numberNpc: 51
 --- !u!4 &281397068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ed17faddd9d773e44adfd59027309cbb, type: 3}
@@ -8056,6 +8057,7 @@ MonoBehaviour:
   NpcMaterial: {fileID: 2100000, guid: 8e838e78606ae8e4f9e17fde6774eafe, type: 2}
   colorlessColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
   transitionSpeed: 2
+  numberNpc: 49
 --- !u!1 &643809791
 GameObject:
   m_ObjectHideFlags: 0
@@ -9144,6 +9146,7 @@ MonoBehaviour:
   NpcMaterial: {fileID: 2100000, guid: fd13b1fe72d613e46ad69b55f8a12539, type: 2}
   colorlessColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
   transitionSpeed: 2
+  numberNpc: 50
 --- !u!1 &755865258
 GameObject:
   m_ObjectHideFlags: 0
@@ -18018,6 +18021,7 @@ MonoBehaviour:
   NpcMaterial: {fileID: 2100000, guid: 65a8bede26525bc43ad2463aafa0c7d7, type: 2}
   colorlessColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
   transitionSpeed: 2
+  numberNpc: 52
 --- !u!1 &1680153935
 GameObject:
   m_ObjectHideFlags: 0

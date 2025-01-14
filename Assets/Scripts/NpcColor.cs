@@ -13,6 +13,7 @@ public class NpcColor : MonoBehaviour {
     [SerializeField] private float transitionSpeed = 2f; // Velocidad de la transición
 
     private bool toggle = false;
+    [SerializeField] KeyCode numberNpc;
 
     private void Start() {
         NpcMaterial = GetComponent<Renderer>().material;
@@ -20,7 +21,7 @@ public class NpcColor : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetKeyDown(KeyCode.P) && Input.GetKeyDown(numberNpc)) {
             toggle = !toggle;
         }
 
