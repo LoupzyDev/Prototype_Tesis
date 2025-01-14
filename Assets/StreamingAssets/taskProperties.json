@@ -18,9 +18,7 @@
   "types": [
     "Programmer",
     "Artist",
-    "Designer",
-    "Tester",
-    "SoundEngineer"
+    "Designer"
   ],
   "descriptions": [
     "Completa esta tarea asegurándote de que el resultado final sea funcional, atractivo y sin errores evidentes.",
