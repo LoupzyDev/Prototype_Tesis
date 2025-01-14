@@ -13952,7 +13952,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   componentVolume: {fileID: 1307058908}
-  transitionSpeed: 1
+  transitionSpeed: 2
+  volumeSaturation: 15
+  colorlessovolumeSaturation: -100
+  vignetteIntensity: 0.3
 --- !u!114 &1307058908
 MonoBehaviour:
   m_ObjectHideFlags: 0
