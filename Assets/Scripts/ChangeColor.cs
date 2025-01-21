@@ -1,76 +1,86 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
+
 
 public class ChangeColor : MonoBehaviour {
 
+    [SerializeField] private List<Renderer> objectsRenderers;
+    private List<MaterialPropertyBlock> propertyBlocks;
+    [SerializeField] private float transitionSpeed = 2f;
+    [SerializeField] private float globalSaturation = 1.0f;
+    private MaterialPropertyBlock propertyBlock;
+
+
     public Volume componentVolume;
-    private ColorAdjustments colorAdjustments;
-    private ColorCurves colorCurves;
     private Vignette vignette;
 
-    public float transitionSpeed = 1f;
-    private float targetSaturation = 0f;
-    private float currentSaturation;
+    private bool toggle = false;
 
-    private bool toggle = true;
-    //public List<Keyframe> curveKeyframe;
+    private void Awake() {
+        propertyBlocks = new List<MaterialPropertyBlock>();
 
-    [Range(0, 100)]
-    [SerializeField] float volumeSaturation;
-
-    [Range(-100, 0)]
-    [SerializeField] float colorlessovolumeSaturation;
-
-    [Range(0, 1)]
-    [SerializeField] float vignetteIntensity;
-
-    private void Start() {
-        componentVolume = GetComponent<Volume>();
-        if (componentVolume.profile.TryGet(out colorAdjustments)) {
-            currentSaturation = colorAdjustments.saturation.value;
-            targetSaturation = currentSaturation;
+        foreach (var renderer in objectsRenderers) {
+            propertyBlocks.Add(new MaterialPropertyBlock());
         }
+
+        AddRenderersByTag("Work");
+        AddRenderersByTag("Fun");
+        AddRenderersByTag("World");
+        AddRenderersByTag("Wall");
+    }
+    private void Start() {
+
+        componentVolume = GetComponent<Volume>();
         if (componentVolume.profile.TryGet(out vignette)) {
             vignette.intensity.value = 0f;
         }
-        if (componentVolume.profile.TryGet(out colorCurves))
-        {
-            colorCurves.hueVsSat.value.AddKey(.704f, 0f);
-            colorCurves.hueVsSat.value.AddKey(.767f, 1f);
-            colorCurves.hueVsSat.value.AddKey(.841f, 0f);
+    }
+    private void AddRenderersByTag(string tag) {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
+        foreach (var obj in objects) {
+            Renderer renderer = obj.GetComponent<Renderer>();
+            if (renderer != null) {
+                objectsRenderers.Add(renderer);
+                propertyBlocks.Add(new MaterialPropertyBlock());
+            }
         }
     }
-
     private void Update() {
-
-
-        currentSaturation = Mathf.Lerp(currentSaturation, targetSaturation, transitionSpeed * Time.deltaTime);
-        colorAdjustments.saturation.value = currentSaturation;
-
         if (Input.GetKeyDown(KeyCode.V)) {
-            if (toggle) {
-                //targetSaturation = colorlessovolumeSaturation;
-                StartCoroutine(AdjustVignetteIntensity(vignetteIntensity));
-
-            } else {
-                //targetSaturation = volumeSaturation;
-                StartCoroutine(AdjustVignetteIntensity(0f));
-            }
             toggle = !toggle;
         }
-    }
 
+        float targetSaturation;
+
+        if (toggle) {
+            targetSaturation = 0f;
+            StartCoroutine(AdjustVignetteIntensity(0.3f));
+        } else {
+            targetSaturation = 1f;
+            StartCoroutine(AdjustVignetteIntensity(0f));
+        }
+
+        globalSaturation = Mathf.Lerp(globalSaturation, targetSaturation, transitionSpeed * Time.deltaTime);
+        globalSaturation = Mathf.Clamp(globalSaturation, 0, 1);
+
+        for (int i = 0; i < objectsRenderers.Count; i++) {
+            objectsRenderers[i].GetPropertyBlock(propertyBlocks[i]);
+            propertyBlocks[i].SetFloat("_Saturation", globalSaturation);
+            objectsRenderers[i].SetPropertyBlock(propertyBlocks[i]);
+        }
+    }
     private System.Collections.IEnumerator AdjustVignetteIntensity(float targetIntensity) {
         float currentIntensity = vignette.intensity.value;
         float startTime = Time.time;
 
-        
+
         while (Mathf.Abs(vignette.intensity.value - targetIntensity) > 0.01f) {
             vignette.intensity.value = Mathf.Lerp(currentIntensity, targetIntensity, (Time.time - startTime) * transitionSpeed);
             yield return null;
         }
-        vignette.intensity.value = targetIntensity;  
+        vignette.intensity.value = targetIntensity;
     }
 }
+

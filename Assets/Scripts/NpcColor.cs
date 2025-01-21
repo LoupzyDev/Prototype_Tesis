@@ -4,35 +4,45 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class NpcColor : MonoBehaviour {
+
     [SerializeField] private Image emote;
     [SerializeField] private Color colorlessEmote;
-    [SerializeField] private Material NpcMaterial;
 
-    private Color originalColor;
-    [SerializeField] private Color colorlessColor;
-    [SerializeField] private float transitionSpeed = 2f; // Velocidad de la transición
+    [SerializeField] private float transitionSpeed = 2f;
 
+    [SerializeField] private Renderer npcRenderer;
+    [SerializeField] private float saturation = 1.0f;
+
+    private MaterialPropertyBlock propertyBlock;
     private bool toggle = false;
     [SerializeField] KeyCode numberNpc;
 
-    private void Start() {
-        NpcMaterial = GetComponent<Renderer>().material;
-        originalColor = NpcMaterial.color;
+    private void Awake() {
+        propertyBlock = new MaterialPropertyBlock();
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.P) && Input.GetKeyDown(numberNpc)) {
+        if (Input.GetKeyDown(numberNpc)) {
             toggle = !toggle;
         }
 
+        float targetSaturation;
+       
+
         if (toggle) {
             emote.color = Color.Lerp(emote.color, colorlessEmote, transitionSpeed * Time.deltaTime);
-            NpcMaterial.color = Color.Lerp(NpcMaterial.color, colorlessColor, transitionSpeed * Time.deltaTime);
-        }
-       
-        else {
+            targetSaturation = 0f;
+        } else {
             emote.color = Color.Lerp(emote.color, Color.white, transitionSpeed * Time.deltaTime);
-            NpcMaterial.color = Color.Lerp(NpcMaterial.color, originalColor, transitionSpeed * Time.deltaTime);
+            targetSaturation = 1f;
         }
+
+        saturation = Mathf.Lerp(saturation, targetSaturation, transitionSpeed * Time.deltaTime);
+        saturation = Mathf.Clamp(saturation, 0, 1);
+
+
+        npcRenderer.GetPropertyBlock(propertyBlock);
+        propertyBlock.SetFloat("_Saturation", saturation);
+        npcRenderer.SetPropertyBlock(propertyBlock);
     }
 }
