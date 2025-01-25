@@ -14,6 +14,9 @@ public class NpcMovement : MonoBehaviour
     public bool isCommandToMove;
     public Vector3 initialPosition;
 
+    private void Start() {
+
+    }
     private void Update() {
         if (Input.GetMouseButtonDown(1)) {
             RaycastHit hit;

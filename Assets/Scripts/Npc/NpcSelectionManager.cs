@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class NpcSelectionManager : MonoBehaviour{
+public class NpcSelectionManager : MonoBehaviour {
 
     public static NpcSelectionManager _instance;
 
@@ -14,6 +15,8 @@ public class NpcSelectionManager : MonoBehaviour{
     public LayerMask ground;
     public GameObject groundMarker;
     [SerializeField] private Camera mainCamera;
+
+    [SerializeField] private Material outlineMaterial;
 
     private void Awake() {
         _instance = this;
@@ -39,7 +42,7 @@ public class NpcSelectionManager : MonoBehaviour{
                 if (!Input.GetKey(KeyCode.LeftShift)) {
                     DeselectAll();
                 }
-                    
+
             }
         }
         if (Input.GetMouseButtonDown(1) && npcsSelect.Count == 1) {
@@ -49,7 +52,7 @@ public class NpcSelectionManager : MonoBehaviour{
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground)) {
 
-                groundMarker.transform.position=new Vector3(hit.point.x,0.04f,hit.point.z);
+                groundMarker.transform.position = new Vector3(hit.point.x, 0.04f, hit.point.z);
 
                 groundMarker.SetActive(false);
                 groundMarker.SetActive(true);
@@ -63,12 +66,12 @@ public class NpcSelectionManager : MonoBehaviour{
         if (npcsSelect.Contains(npc) == false) {
 
             npcsSelect.Add(npc);
-            TriggerSelectionIndicator(npc, true);
+            UpdateOutline(npc, true);
             EnableNpcMovement(npc, true);
         } else {
 
-            EnableNpcMovement(npc,false);
-            TriggerSelectionIndicator(npc, false);
+            EnableNpcMovement(npc, false);
+            UpdateOutline(npc, false);
             npcsSelect.Remove(npc);
         }
     }
@@ -77,7 +80,7 @@ public class NpcSelectionManager : MonoBehaviour{
 
         foreach (var npc in npcsSelect) {
             EnableNpcMovement(npc, false);
-            TriggerSelectionIndicator(npc, false);
+            UpdateOutline(npc, false);
         }
         groundMarker.SetActive(false);
         npcsSelect.Clear();
@@ -87,8 +90,8 @@ public class NpcSelectionManager : MonoBehaviour{
 
         DeselectAll();
         npcsSelect.Add(npc);
-        TriggerSelectionIndicator(npc, true);
-        EnableNpcMovement(npc,true);
+        UpdateOutline(npc, true);
+        EnableNpcMovement(npc, true);
     }
 
     private void EnableNpcMovement(GameObject npc, bool shouldMove) {
@@ -96,7 +99,24 @@ public class NpcSelectionManager : MonoBehaviour{
         npc.GetComponent<NpcMovement>().enabled = shouldMove;
     }
 
-    private void TriggerSelectionIndicator(GameObject npc, bool isVisible) {
-        npc.transform.GetChild(0).gameObject.SetActive(isVisible);
+    private void UpdateOutline(GameObject npc, bool isVisible) {
+        SkinnedMeshRenderer skinnedMeshRenderer = npc.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
+
+        if (isVisible) {
+
+            var materials = new List<Material>(skinnedMeshRenderer.materials);
+            if (!materials.Contains(outlineMaterial)) {
+                materials.Add(outlineMaterial);
+            }
+            skinnedMeshRenderer.materials = materials.ToArray();
+        } else {
+
+            var materials = new List<Material>(skinnedMeshRenderer.materials);
+            materials.Remove(outlineMaterial);
+            skinnedMeshRenderer.materials = materials.ToArray();
+        }
     }
 }
+
+
+

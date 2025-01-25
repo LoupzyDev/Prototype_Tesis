@@ -53,15 +53,22 @@ public class Npc : MonoBehaviour {
     [SerializeField] private List<Sprite> _imageSprite;
 
     public NpcMovement npcMovement;
-    
 
-    public Npc() { }
+    [Header("Unity")]
+    [Space(10)]
+    [SerializeField] NavMeshAgent navMeshAgent;
+    [SerializeField] private Animator animator;
+
     private void Awake() {
         InitializeNpc();
     }
     private void Start() {
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         NpcSelectionManager._instance.allNpcList.Add(gameObject);
         ChangeGameState(NpcState.Walking);
+
     }
 
     private void Update()
@@ -79,6 +86,12 @@ public class Npc : MonoBehaviour {
 
         if (npcMovement.CheckDistance() && state == NpcState.Walking) {
             ChangeGameState(NpcState.None);
+        }
+
+        if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance) {
+            animator.SetBool("isMoving",true);
+        } else {
+            animator.SetBool("isMoving", false);
         }
     }
 
@@ -112,7 +125,7 @@ public class Npc : MonoBehaviour {
                 break;
             case NpcState.Working:
                 _imageState.sprite= _imageSprite[0];
-                StartCoroutine(WorkingRoutine()); // Comienza el trabajo en la tarea
+                StartCoroutine(WorkingRoutine()); 
                 break;
             case NpcState.Walking:
                 _imageState.sprite = _imageSprite[1];
