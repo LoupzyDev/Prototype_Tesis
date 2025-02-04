@@ -8,6 +8,7 @@ public class Task : MonoBehaviour {
     public string typeTask;
     public float timeTask;
     public bool isComplete;
+    [SerializeField] bool isTutorial;
 
     [SerializeField] private TextMeshProUGUI taskNameUI;
     [SerializeField] private TextMeshProUGUI taskTypeUI;
@@ -27,6 +28,9 @@ public class Task : MonoBehaviour {
 
     public void ShowDescription() {
         taskDescriptionUI.text = descriptionTask;
+        if (isTutorial) { 
+            DialogueManager._instance.exitButton.SetActive(true);
+        }
     }
 }
 

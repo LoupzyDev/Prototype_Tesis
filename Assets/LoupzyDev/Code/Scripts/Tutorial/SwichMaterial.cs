@@ -2,13 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SwitchMaterial : MonoBehaviour {
+    public static SwitchMaterial _instance;
     [SerializeField] private Material outlineMaterial;
-    [SerializeField] private bool isSwitched;
+    public bool isSwitched;
     [SerializeField] private List<Material> materialsList = new List<Material>();
 
     private Renderer renderFurniture;
     private Material[] originalMaterials;
 
+    private void Awake() {
+        _instance = this;
+    }
     private void Start() {
         isSwitched = false;
         renderFurniture = GetComponent<Renderer>();

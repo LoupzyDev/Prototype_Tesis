@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour {
     public void UpdateAllFurniturePrices() {
         for (int i = 0; i < furniturePriceTMPList.Count; i++) {
             if (i < database.objectsData.Count) {
-                int price = database.objectsData[i].Price; // Obtener el precio del mueble según el índice
+                int price = database.objectsData[i].Price;
                 furniturePriceTMPList[i].text = $"Precio: {price} Mxn";
             } else {
                 furniturePriceTMPList[i].text = "No disponible"; 

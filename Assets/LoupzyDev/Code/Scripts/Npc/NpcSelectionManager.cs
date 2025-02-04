@@ -16,6 +16,7 @@ public class NpcSelectionManager : MonoBehaviour {
     public GameObject groundMarker;
     [SerializeField] private Camera mainCamera;
 
+    [SerializeField] private bool isTutorial;
 
     private void Awake() {
         _instance = this;
@@ -99,12 +100,23 @@ public class NpcSelectionManager : MonoBehaviour {
     }
 
     private void UpdateOutline(GameObject npc, bool isVisible) {
+
         SkinnedMeshRenderer skinnedMeshRenderer = npc.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
         var outlineMaterial = skinnedMeshRenderer.materials[1];
-        if (isVisible) {
-            outlineMaterial.SetFloat("_Outline_Thickness", 0.0002f);
-        } else {
-            outlineMaterial.SetFloat("_Outline_Thickness", 0f);
+
+        if (!isTutorial) {
+            if (isVisible) {
+                outlineMaterial.SetFloat("_Outline_Thickness", 0.0002f);
+            } else {
+                outlineMaterial.SetFloat("_Outline_Thickness", 0f);
+            }
+        }else {
+            outlineMaterial.SetColor("_OutlineColor", Color.green);
+            if (isVisible) {
+                outlineMaterial.SetFloat("_Outline_Thickness", 0.0002f);
+            } else {
+                outlineMaterial.SetColor("_OutlineColor", Color.red);
+            }
         }
     }
 }

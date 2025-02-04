@@ -14,6 +14,7 @@ public class TaskManager : MonoBehaviour {
     [SerializeField] private int maxDailyTasks; // Número máximo de tareas por día
     private int currentTaskCount = 0; // Contador de tareas creadas
 
+    public bool isTutorial;
     private void Awake() {
         _instance = this;
         LoadTaskDataFromJson();
@@ -65,7 +66,12 @@ public class TaskManager : MonoBehaviour {
 
         string randomName = GetRandomFromList(taskJsonData.names);
         TaskData.Type randomType = GetRandomFromEnum<TaskData.Type>();
+
         string randomDescription = GetRandomFromList(taskJsonData.descriptions);
+
+        if (isTutorial) {
+            randomType = TaskData.Type.Programmer;
+        }
 
         Task taskObject = indexTask.GetComponent<Task>();
         taskObject.timeTask = randomTime;
