@@ -2207,7 +2207,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_UseGeometry: 1
+  m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
@@ -7709,7 +7709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5011569366493065107, guid: 784367b8e7de2214fafae35cf92c7f01, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -5011569366493065107, guid: 784367b8e7de2214fafae35cf92c7f01, type: 3}
       propertyPath: m_TagString
@@ -7721,7 +7721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 784367b8e7de2214fafae35cf92c7f01, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 784367b8e7de2214fafae35cf92c7f01, type: 3}
       propertyPath: m_TagString
@@ -14115,6 +14115,8 @@ MonoBehaviour:
   currentDay:
     numberOfTasks: 0
     minQuality: 0
+  desk: {fileID: 228794633}
+  npc: {fileID: 86873014}
 --- !u!114 &1578992501
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,6 +27,8 @@ public class StateManager : MonoBehaviour {
 
     [SerializeField] private DaySO daysDataSO;
     [SerializeField] private DayData currentDay;
+    [SerializeField] private GameObject desk;
+    [SerializeField] private GameObject npc;
 
     private int numberOfTasks_GM;
     private float minQuality_GM;
@@ -41,25 +43,40 @@ public class StateManager : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetMouseButtonDown(0) && currentState == State.ShowDialogue) {
+        if (Input.GetMouseButtonDown(0) && currentState == State.ShowDialogue)
+        {
             ChangeState(State.ClickNpc);
-        } else if (Input.GetMouseButtonDown(0) && currentState == State.ClickNpc && returnIndex == 0) {
+        }
+        else if (Input.GetMouseButtonDown(0) && currentState == State.ClickNpc && returnIndex == 0)
+        {
             DialogueManager._instance.TurnOffOnTextPanel(false, false, true);
             DialogueManager._instance.UpdateIcon(0);
             outlineNpc.SetFloat("_Outline_Thickness", 0.0002f);
             outlineNpc.SetColor("_OutlineColor", Color.red);
             selectionManager.GetComponent<NpcSelectionManager>().enabled = true;
             returnIndex++;
-        } else if (Input.GetMouseButtonDown(0) && currentState == State.ClickNpc && returnIndex == 1) {
+        }
+        else if (Input.GetMouseButtonDown(0) && currentState == State.ClickNpc && returnIndex == 1)
+        {
             ChangeState(State.Move);
             box.SetActive(true);
             DialogueManager._instance.TurnOffOnTextPanel(false, false, false);
             returnIndex++;
-        } else if (currentState == State.Move && returnIndex == 1 && BoxCheck._instance.isEnd) {
+        }
+        else if (currentState == State.Move && returnIndex == 1 && BoxCheck._instance.isEnd)
+        {
             outlineNpc.SetFloat("_Outline_Thickness", 0.0f);
             outlineNpc.SetColor("_OutlineColor", Color.white);
             ChangeState(State.OpenWindows);
-        } 
+        }else if(npc.GetComponent<NpcMovement>().enabled && currentState == State.MoveToDesk) 
+        { 
+            SwitchMaterial._instance.isSwitched = true;
+        }
+        else if (desk.GetComponent<Desk>().IsOccupied() && currentState == State.MoveToDesk)
+        {
+            DialogueManager._instance.TurnOffOnTextPanel(false, false, false);
+
+        }
     }
 
     public void ChangeState(State newState) {
@@ -99,7 +116,8 @@ public class StateManager : MonoBehaviour {
                 break;
 
             case State.MoveToDesk:
-                SwitchMaterial._instance.isSwitched = true;
+                DialogueManager._instance.TurnOffOnTextPanel(false, false, true);
+                DialogueManager._instance.UpdateIcon(0);
                 break;
 
             case State.TaskComplete:
