@@ -11,6 +11,7 @@ TagManager:
   - Occupied
   - DragParent
   - Door
+  - World
   layers:
   - Default
   - TransparentFX
