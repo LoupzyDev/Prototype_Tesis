@@ -15,7 +15,7 @@ public enum NpcState {
 public class Npc : MonoBehaviour {
 
 
-    private NpcState state;
+    public NpcState state;
 
     private TaskData taskData;
 
@@ -129,10 +129,15 @@ public class Npc : MonoBehaviour {
                 _imageState.sprite = _imageSprite[2];
                 break;
             case NpcState.Working:
+                npcMovement.agent.ResetPath();
+                npcMovement.agent.isStopped = true;
+                npcMovement.enabled = false;
                 _imageState.sprite= _imageSprite[0];
                 StartCoroutine(WorkingRoutine()); 
                 break;
             case NpcState.Walking:
+                GetComponent<NpcMovement>().enabled = true;
+                npcMovement.agent.isStopped = false;
                 _imageState.sprite = _imageSprite[1];
                 npcMovement.GoToPosition(npcMovement.initialPosition);
                 break;

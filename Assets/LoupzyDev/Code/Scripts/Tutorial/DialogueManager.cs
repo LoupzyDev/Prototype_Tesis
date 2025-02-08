@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager _instance;
     [SerializeField] private List<Sprite> mouseSprites;
+    [SerializeField] private List<GameObject> npcPresentations;
 
     [SerializeField] private List<string> narrativeList;
     [SerializeField] private List<string> npcDialogueList;
@@ -17,7 +18,8 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private GameObject narrativePanelNpc;
     [SerializeField] private GameObject textPanelNpc;
-    [SerializeField] private Image mouseImage;
+    [SerializeField] private Image npcImage;
+    public Image deskImage;
 
     [SerializeField] private GameObject windowsPanel;
     public GameObject exitButton;
@@ -34,10 +36,10 @@ public class DialogueManager : MonoBehaviour
     public void TurnOffOnTextPanel(bool textNarrative, bool textNpc, bool mouseIcon) { 
         narrativePanelNpc.SetActive(textNarrative);
         textPanelNpc.SetActive(textNpc);
-        mouseImage.gameObject.SetActive(mouseIcon);
+        npcImage.gameObject.SetActive(mouseIcon);
     }
     public void UpdateIcon(int index) {
-        mouseImage.sprite = mouseSprites[index];
+        npcImage.sprite = mouseSprites[index];
     }
 
     public void SwichPanelWindow(bool isActive) {
@@ -51,5 +53,10 @@ public class DialogueManager : MonoBehaviour
         
         StateManager._instance.SwichIconWindow(false, false);
         BoxCheck._instance.panelMission.SetActive(false);
+    }
+    public void TurnOnNpcPresentation(bool isOn) {
+        foreach (var npcP in npcPresentations) {
+            npcP.gameObject.SetActive(isOn);
+        }
     }
 }

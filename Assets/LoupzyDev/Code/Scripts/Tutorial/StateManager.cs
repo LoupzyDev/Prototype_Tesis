@@ -15,6 +15,7 @@ public enum State {
 
 public class StateManager : MonoBehaviour {
     public static StateManager _instance;
+    public List<GameObject> remainingNps;
     private State currentState = State.None;
     private int returnIndex;
     [SerializeField] private Material outlineNpc;
@@ -43,39 +44,46 @@ public class StateManager : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetMouseButtonDown(0) && currentState == State.ShowDialogue)
-        {
+        if (Input.GetMouseButtonDown(0) && currentState == State.ShowDialogue) {
             ChangeState(State.ClickNpc);
-        }
-        else if (Input.GetMouseButtonDown(0) && currentState == State.ClickNpc && returnIndex == 0)
-        {
+        } else if (Input.GetMouseButtonDown(0) && currentState == State.ClickNpc && returnIndex == 0) {
             DialogueManager._instance.TurnOffOnTextPanel(false, false, true);
             DialogueManager._instance.UpdateIcon(0);
             outlineNpc.SetFloat("_Outline_Thickness", 0.0002f);
             outlineNpc.SetColor("_OutlineColor", Color.red);
             selectionManager.GetComponent<NpcSelectionManager>().enabled = true;
             returnIndex++;
-        }
-        else if (Input.GetMouseButtonDown(0) && currentState == State.ClickNpc && returnIndex == 1)
-        {
+        } else if (Input.GetMouseButtonDown(0) && currentState == State.ClickNpc && returnIndex == 1) {
             ChangeState(State.Move);
             box.SetActive(true);
             DialogueManager._instance.TurnOffOnTextPanel(false, false, false);
             returnIndex++;
-        }
-        else if (currentState == State.Move && returnIndex == 1 && BoxCheck._instance.isEnd)
-        {
+        } else if (currentState == State.Move && returnIndex == 1 && BoxCheck._instance.isEnd) {
             outlineNpc.SetFloat("_Outline_Thickness", 0.0f);
             outlineNpc.SetColor("_OutlineColor", Color.white);
             ChangeState(State.OpenWindows);
-        }else if(npc.GetComponent<NpcMovement>().enabled && currentState == State.MoveToDesk) 
-        { 
+        } else if (npc.GetComponent<NpcMovement>().enabled && currentState == State.MoveToDesk && returnIndex == 0) {
             SwitchMaterial._instance.isSwitched = true;
-        }
-        else if (desk.GetComponent<Desk>().IsOccupied() && currentState == State.MoveToDesk)
-        {
+            DialogueManager._instance.deskImage.gameObject.SetActive(true);
+        } else if (desk.GetComponent<Desk>().IsOccupied() && currentState == State.MoveToDesk && returnIndex == 0) {
             DialogueManager._instance.TurnOffOnTextPanel(false, false, false);
-
+            returnIndex++;
+        } else if (currentState == State.MoveToDesk && returnIndex == 1) {
+            DialogueManager._instance.deskImage.gameObject.SetActive(false);
+            DialogueManager._instance.TurnOffOnTextPanel(false, false, true);
+            DialogueManager._instance.UpdateIcon(1);
+            returnIndex++;
+        } else if (currentState == State.MoveToDesk && returnIndex == 2 && desk.GetComponent<Desk>().IsOccupied() == false) {
+            DialogueManager._instance.TurnOffOnTextPanel(true, false, true);
+            DialogueManager._instance.UpdateNarrativeDialogue(1);
+            DialogueManager._instance.UpdateIcon(2);
+            ChangeState(State.TaskComplete);
+        } else if (currentState == State.TaskComplete && returnIndex == 1) {
+            npc.GetComponent<NpcMovement>().enabled = false;
+            SwitchMaterial._instance.isSwitched = false;
+            returnIndex++;
+        } else if (currentState == State.TaskComplete && returnIndex == 2 && remainingNps[0].GetComponent<NpcMovement>().agent.hasPath==false) {
+            DialogueManager._instance.TurnOnNpcPresentation(true);
         }
     }
 
@@ -121,6 +129,12 @@ public class StateManager : MonoBehaviour {
                 break;
 
             case State.TaskComplete:
+                foreach (var npc in remainingNps) {
+                    npc.gameObject.SetActive(true);
+                    NpcSelectionManager._instance.npcsSelect.Add(npc.gameObject);
+                    npc.GetComponent<Npc>().state = NpcState.Walking;
+                }
+                returnIndex++;
                 break;
         }
     }
