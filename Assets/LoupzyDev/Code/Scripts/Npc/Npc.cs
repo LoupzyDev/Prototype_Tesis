@@ -60,6 +60,10 @@ public class Npc : MonoBehaviour {
     [SerializeField] private Animator animator;
     [SerializeField] private bool isTutorial;
 
+    [Header("Effects")]
+    [Space(10)]
+    [SerializeField] private ParticleSystem npcParticleS;
+
     private void Awake() {
         InitializeNpc();
     }
@@ -133,7 +137,8 @@ public class Npc : MonoBehaviour {
                 npcMovement.agent.isStopped = true;
                 npcMovement.enabled = false;
                 _imageState.sprite= _imageSprite[0];
-                StartCoroutine(WorkingRoutine()); 
+                StartCoroutine(WorkingRoutine());
+                npcParticleS.Play();
                 break;
             case NpcState.Walking:
                 GetComponent<NpcMovement>().enabled = true;
@@ -161,6 +166,7 @@ public class Npc : MonoBehaviour {
             }
             taskData.IsComplete = true; // Marcar como completada
             TaskManager._instance.RemoveCompletedTasks();
+            npcParticleS.Stop();
             ChangeGameState(NpcState.Walking);
             Debug.Log("Acabé el trabajo en: " + taskData.Name);
         }
