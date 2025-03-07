@@ -22,7 +22,8 @@ public class TaskManager : MonoBehaviour {
     }
 
     private void LoadTaskDataFromJson() {
-        string filePath = Path.Combine(Application.dataPath, "LoupzyDev", "StreamingAssets", "taskProperties.json");
+        string filePath = Path.Combine(Application.streamingAssetsPath, "taskProperties.json");
+
         string jsonContent = File.ReadAllText(filePath);
         taskJsonData = JsonUtility.FromJson<TaskJsonData>(jsonContent);
     }

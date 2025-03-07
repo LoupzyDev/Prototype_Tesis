@@ -68,7 +68,7 @@ public class CanvasManager : MonoBehaviour {
     }
     public void RestartScene() {
         Time.timeScale = 1.0f; // Asegúrate de reanudar el tiempo antes de reiniciar
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(0);
     }
     public void QuitGame() {
         Application.Quit();
