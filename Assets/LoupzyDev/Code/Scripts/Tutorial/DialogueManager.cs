@@ -23,6 +23,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private GameObject windowsPanel;
     public GameObject exitButton;
+    public GameObject buttonNextScene;
     private void Awake() {
         _instance = this;
     }
@@ -57,6 +58,7 @@ public class DialogueManager : MonoBehaviour
     public void TurnOnNpcPresentation(bool isOn) {
         foreach (var npcP in npcPresentations) {
             npcP.gameObject.SetActive(isOn);
+            buttonNextScene.SetActive(isOn);
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public enum State {
     None,
@@ -152,4 +153,7 @@ public class StateManager : MonoBehaviour {
         iconsAlert.SetActive(icons);
     }
 
+    public void changeAnotherScene() {
+        SceneManager.LoadScene("Level_1");
+    }
 }

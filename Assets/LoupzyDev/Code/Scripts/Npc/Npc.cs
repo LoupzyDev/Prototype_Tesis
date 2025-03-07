@@ -174,6 +174,10 @@ public class Npc : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Work")) {
+            if (stamina <= 0) {
+                Debug.Log("NPC está demasiado cansado para trabajar.");
+                return; 
+            }
             actuallyDesk = collision.gameObject;
             Desk desk = collision.gameObject.GetComponent<Desk>();
 
