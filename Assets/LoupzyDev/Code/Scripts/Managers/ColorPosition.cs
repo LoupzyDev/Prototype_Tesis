@@ -10,6 +10,8 @@ public class ColorPosition : MonoBehaviour
 
     void Update()
     {
+        radius += 0.5f * Time.deltaTime;
+
         Debug.Log("Escala Actual " + transform.localScale);
         Shader.SetGlobalVector("_Position", transform.position);
         Shader.SetGlobalFloat("_Radius", radius);

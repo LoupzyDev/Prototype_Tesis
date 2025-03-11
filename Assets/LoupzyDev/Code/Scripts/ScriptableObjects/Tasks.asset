@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce9c7e3712f066409c9895c97ee09b4, type: 3}
   m_Name: Tasks
   m_EditorClassIdentifier: 
-  TaskList: []
+  TaskList:
+  - index: 0
+    Name: Corrige errores en el sistema
+    Description: Entrega esta tarea antes del plazo establecido para mantener el
+      flujo de trabajo del equipo.
+    TypeTask: 0
+    Time: 1.6167353
+    IsAssigned: 0
+    IsComplete: 0
+  - index: 1
+    Name: "Implementa la f\xEDsica del juego"
+    Description: Realiza pruebas exhaustivas antes de entregar el resultado final
+      para garantizar calidad y funcionalidad.
+    TypeTask: 2
+    Time: 9.780622
+    IsAssigned: 0
+    IsComplete: 0

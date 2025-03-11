@@ -12,11 +12,12 @@ public class NpcMovement : MonoBehaviour
     [SerializeField] private GameObject door;
 
     public bool isCommandToMove;
+    public bool isFinishTask = false;
     public Vector3 initialPosition;
 
 
     private void Update() {
-        if (Input.GetMouseButtonDown(1)) {
+        if (Input.GetMouseButtonDown(1) && !isFinishTask) {
             RaycastHit hit;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground)) {

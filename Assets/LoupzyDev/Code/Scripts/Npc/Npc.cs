@@ -128,11 +128,14 @@ public class Npc : MonoBehaviour {
 
         switch (state) {
             case NpcState.None:
+                npcMovement.isFinishTask = false;
+                GetComponent<NpcMovement>().enabled = false;
                 break;
             case NpcState.Playing:
                 _imageState.sprite = _imageSprite[2];
                 break;
             case NpcState.Working:
+                npcMovement.isFinishTask = false;
                 npcMovement.agent.ResetPath();
                 npcMovement.agent.isStopped = true;
                 npcMovement.enabled = false;
@@ -141,12 +144,14 @@ public class Npc : MonoBehaviour {
                 npcParticleS.Play();
                 break;
             case NpcState.Walking:
+                npcMovement.isFinishTask = true;
                 GetComponent<NpcMovement>().enabled = true;
                 npcMovement.agent.isStopped = false;
                 _imageState.sprite = _imageSprite[1];
                 npcMovement.GoToPosition(npcMovement.initialPosition);
                 break;
             case NpcState.Sleeping:
+                npcMovement.isFinishTask = true;
                 _imageState.sprite = _imageSprite[3];
                 npcMovement.goToDoor();
                 break;

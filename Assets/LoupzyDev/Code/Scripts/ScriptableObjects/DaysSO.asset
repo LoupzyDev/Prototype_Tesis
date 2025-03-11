@@ -15,9 +15,9 @@ MonoBehaviour:
   days:
   - numberOfTasks: 1
     minQuality: 33
-  - numberOfTasks: 5
+  - numberOfTasks: 15
     minQuality: 66
-  - numberOfTasks: 7
+  - numberOfTasks: 15
     minQuality: 3
   - numberOfTasks: 9
     minQuality: 3
