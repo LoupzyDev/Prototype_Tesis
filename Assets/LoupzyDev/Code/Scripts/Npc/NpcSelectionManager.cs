@@ -24,7 +24,6 @@ public class NpcSelectionManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
-
             RaycastHit hit;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
@@ -46,7 +45,7 @@ public class NpcSelectionManager : MonoBehaviour {
             }
         }
         if (Input.GetMouseButtonDown(1) && npcsSelect.Count == 1) {
-
+            AudioManager._instance.PlayAudio(AudioState.MoveNpc);
             RaycastHit hit;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 

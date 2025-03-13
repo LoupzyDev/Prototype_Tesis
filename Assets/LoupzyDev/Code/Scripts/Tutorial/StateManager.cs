@@ -36,11 +36,11 @@ public class StateManager : MonoBehaviour {
     private float minQuality_GM;
     private void Awake() {
         _instance = this;
-        returnIndex = 0;
         outlineNpc.SetFloat("_Outline_Thickness", 0.0f);
         outlineNpc.SetColor("_OutlineColor", Color.white);
     }
     void Start() {
+        returnIndex = 0;
         ChangeState(State.ShowDialogue);
     }
 

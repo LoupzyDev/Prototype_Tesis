@@ -171,6 +171,7 @@ public class Npc : MonoBehaviour {
             }
             taskData.IsComplete = true; // Marcar como completada
             TaskManager._instance.RemoveCompletedTasks();
+            AudioManager._instance.PlayAudio(AudioState.TaskComplete);
             npcParticleS.Stop();
             ChangeGameState(NpcState.Walking);
             Debug.Log("Acabé el trabajo en: " + taskData.Name);
