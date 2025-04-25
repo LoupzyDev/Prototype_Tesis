@@ -2,7 +2,11 @@ using TMPro;
 using UnityEngine;
 
 public class Clock : MonoBehaviour {
+
+    public static Clock _instance;
+
     public TextMeshProUGUI Reloj;
+    public string actualTime;
     public Light directionalLight;
 
     [SerializeField] private float segundos;
@@ -18,6 +22,9 @@ public class Clock : MonoBehaviour {
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject buttonSkipNight;
 
+    private void Awake() {
+        _instance = this;
+    }
     void Start() {
         GameManager._instance.updateTask(today);
     }
@@ -103,8 +110,10 @@ public class Clock : MonoBehaviour {
 
         string periodo = horas < 12 ? "AM" : "PM";
 
-        Reloj.text = AgregarUnCeroAdelanteSiEsNecesario(horas12) + ":"
+        actualTime = AgregarUnCeroAdelanteSiEsNecesario(horas12) + ":"
                    + AgregarUnCeroAdelanteSiEsNecesario(minutos) + " " + periodo;
+
+        Reloj.text = actualTime;
     }
 
     string AgregarUnCeroAdelanteSiEsNecesario(int n) {

@@ -11,22 +11,26 @@ public class Task : MonoBehaviour {
     [SerializeField] bool isTutorial;
 
     [SerializeField] private TextMeshProUGUI taskNameUI;
+    [SerializeField] private TextMeshProUGUI taskNameDescription;
     [SerializeField] private TextMeshProUGUI taskTypeUI;
     [SerializeField] private TextMeshProUGUI taskDescriptionUI;
+    [SerializeField] private TextMeshProUGUI taskTime;
+
 
     public void UpdateTaskUI() {
+        taskTime.text = Clock._instance.actualTime;
         taskNameUI.text = nameTask;
-        taskTypeUI.text = typeTask;
     }
 
     private void Update() {
-
         if (!TaskManager._instance.taskData.TaskList.Exists(task => task.index == index)) {
             gameObject.SetActive(false); 
         }
     }
 
-    public void ShowDescription() {
+    public void ShowDescription() { 
+        taskNameDescription.text = nameTask;
+        taskTypeUI.text = typeTask;
         taskDescriptionUI.text = descriptionTask;
         if (isTutorial) { 
             DialogueManager._instance.exitButton.SetActive(true);
