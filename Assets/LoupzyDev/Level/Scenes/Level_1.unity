@@ -1336,6 +1336,11 @@ MonoBehaviour:
   taskTypeUI: {fileID: 963751884}
   taskDescriptionUI: {fileID: 579678774}
   taskTime: {fileID: 1704700604}
+  iconCircle: {fileID: 2022262118}
+  colorList:
+  - {r: 0.69803923, g: 0.5254902, b: 0.6627451, a: 1}
+  - {r: 0.45035335, g: 0.6603774, b: 0.18378428, a: 1}
+  - {r: 0.8018868, g: 0.731188, b: 0.049172327, a: 1}
 --- !u!114 &133729811 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4788176590952663805, guid: 50cf28b5363d0a845a984653ff4db3bc, type: 3}
@@ -6967,6 +6972,11 @@ MonoBehaviour:
   taskTypeUI: {fileID: 963751884}
   taskDescriptionUI: {fileID: 579678774}
   taskTime: {fileID: 1153247592}
+  iconCircle: {fileID: 223233919}
+  colorList:
+  - {r: 0.69803923, g: 0.5254902, b: 0.6627451, a: 1}
+  - {r: 0.45035335, g: 0.6603774, b: 0.18378428, a: 1}
+  - {r: 0.8018868, g: 0.731188, b: 0.049172327, a: 1}
 --- !u!1 &750889107
 GameObject:
   m_ObjectHideFlags: 0
@@ -9625,6 +9635,11 @@ MonoBehaviour:
   taskTypeUI: {fileID: 963751884}
   taskDescriptionUI: {fileID: 579678774}
   taskTime: {fileID: 1266474924}
+  iconCircle: {fileID: 1462312669}
+  colorList:
+  - {r: 0.69803923, g: 0.5254902, b: 0.6627451, a: 1}
+  - {r: 0.45035335, g: 0.6603774, b: 0.18378428, a: 1}
+  - {r: 0.8018868, g: 0.731188, b: 0.049172327, a: 1}
 --- !u!1 &1029576112
 GameObject:
   m_ObjectHideFlags: 0
@@ -11059,6 +11074,11 @@ MonoBehaviour:
   taskTypeUI: {fileID: 963751884}
   taskDescriptionUI: {fileID: 579678774}
   taskTime: {fileID: 543948281}
+  iconCircle: {fileID: 2059606440}
+  colorList:
+  - {r: 0.69803923, g: 0.5254902, b: 0.6627451, a: 1}
+  - {r: 0.45035335, g: 0.6603774, b: 0.18378428, a: 1}
+  - {r: 0.8018868, g: 0.731188, b: 0.049172327, a: 1}
 --- !u!1 &1183253685
 GameObject:
   m_ObjectHideFlags: 0
@@ -13360,6 +13380,11 @@ MonoBehaviour:
   taskTypeUI: {fileID: 963751884}
   taskDescriptionUI: {fileID: 579678774}
   taskTime: {fileID: 855459730}
+  iconCircle: {fileID: 1619054231}
+  colorList:
+  - {r: 0.69803923, g: 0.5254902, b: 0.6627451, a: 1}
+  - {r: 0.45035335, g: 0.6603774, b: 0.18378428, a: 1}
+  - {r: 0.8018868, g: 0.731188, b: 0.049172327, a: 1}
 --- !u!1 &1414278227
 GameObject:
   m_ObjectHideFlags: 0
@@ -15133,6 +15158,11 @@ MonoBehaviour:
   taskTypeUI: {fileID: 963751884}
   taskDescriptionUI: {fileID: 579678774}
   taskTime: {fileID: 1483818929}
+  iconCircle: {fileID: 1016531360}
+  colorList:
+  - {r: 0.69803923, g: 0.5254902, b: 0.6627451, a: 1}
+  - {r: 0.45035335, g: 0.6603774, b: 0.18378428, a: 1}
+  - {r: 0.8018868, g: 0.731188, b: 0.049172327, a: 1}
 --- !u!1 &1589135933
 GameObject:
   m_ObjectHideFlags: 0
@@ -19274,6 +19304,11 @@ MonoBehaviour:
   taskTypeUI: {fileID: 963751884}
   taskDescriptionUI: {fileID: 579678774}
   taskTime: {fileID: 1765581801}
+  iconCircle: {fileID: 1879504753}
+  colorList:
+  - {r: 0.69803923, g: 0.5254902, b: 0.6627451, a: 1}
+  - {r: 0.45035335, g: 0.6603774, b: 0.18378428, a: 1}
+  - {r: 0.8018868, g: 0.731188, b: 0.049172327, a: 1}
 --- !u!4 &1971970139 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 71d8c39a63091d04cada68bd3d4a6f89, type: 3}
