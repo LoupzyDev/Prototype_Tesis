@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Clock : MonoBehaviour {
 
@@ -21,6 +23,10 @@ public class Clock : MonoBehaviour {
 
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject buttonSkipNight;
+
+    [SerializeField] private Image iconClock;
+    [SerializeField] private List<Sprite> spritesClock;
+    [SerializeField] private List<Color> spritesColor;
 
     private void Awake() {
         _instance = this;
@@ -72,6 +78,8 @@ public class Clock : MonoBehaviour {
 
     void CambiarANoche() {
         isNight = true;
+        iconClock.sprite = spritesClock[1];
+        iconClock.color = spritesColor[1];
         door.GetComponent<Collider>().enabled = true;
         buttonSkipNight.gameObject.SetActive(true);
         GameManager._instance.SetAllNpcsToSleeping();
@@ -79,6 +87,8 @@ public class Clock : MonoBehaviour {
 
     void CambiarADia() {
         isNight = false;
+        iconClock.sprite = spritesClock[0];
+        iconClock.color = spritesColor[0];
         EnableSkipNight(false);
         door.GetComponent<Collider>().enabled = false;
         buttonSkipNight.gameObject.SetActive(false);
