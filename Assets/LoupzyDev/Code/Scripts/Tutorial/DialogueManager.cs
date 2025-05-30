@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager _instance;
     [SerializeField] private List<Sprite> mouseSprites;
     [SerializeField] private List<GameObject> npcPresentations;
+    [SerializeField] private List<GameObject> npcPanelIcon;
 
     [SerializeField] private List<string> narrativeList;
     [SerializeField] private List<string> npcDialogueList;
@@ -59,6 +60,10 @@ public class DialogueManager : MonoBehaviour
         foreach (var npcP in npcPresentations) {
             npcP.gameObject.SetActive(isOn);
             buttonNextScene.SetActive(isOn);
+        }
+        foreach (var npcP in npcPanelIcon)
+        {
+            npcP.gameObject.SetActive(!isOn);
         }
     }
 }

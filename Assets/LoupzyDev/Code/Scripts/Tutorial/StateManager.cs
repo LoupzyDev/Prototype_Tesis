@@ -47,6 +47,12 @@ public class StateManager : MonoBehaviour {
     }
 
     void Update() {
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            changeAnotherScene();
+        }
+
         if (Input.GetMouseButtonDown(0) && currentState == State.ShowDialogue) {
             ChangeState(State.ClickNpc);
         } else if (Input.GetMouseButtonDown(0) && currentState == State.ClickNpc && returnIndex == 0) {
@@ -66,7 +72,6 @@ public class StateManager : MonoBehaviour {
             outlineNpc.SetColor("_OutlineColor", Color.white);
             ChangeState(State.OpenWindows);
         } else if (npc.GetComponent<NpcMovement>().enabled && currentState == State.MoveToDesk && returnIndex == 0) {
-            SwitchMaterial._instance.isSwitched = true;
             DialogueManager._instance.deskImage.gameObject.SetActive(true);
         } else if (desk.GetComponent<Desk>().IsOccupied() && currentState == State.MoveToDesk && returnIndex == 0) {
             DialogueManager._instance.TurnOffOnTextPanel(false, false, false);
@@ -83,7 +88,6 @@ public class StateManager : MonoBehaviour {
             ChangeState(State.TaskComplete);
         } else if (currentState == State.TaskComplete && returnIndex == 1) {
             npc.GetComponent<NpcMovement>().enabled = false;
-            SwitchMaterial._instance.isSwitched = false;
             returnIndex++;
         } else if (currentState == State.TaskComplete && returnIndex == 2 && remainingNps[0].GetComponent<NpcMovement>().agent.hasPath==false) {
             DialogueManager._instance.TurnOnNpcPresentation(true);
