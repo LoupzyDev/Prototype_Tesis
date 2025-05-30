@@ -52,7 +52,7 @@ public class DialogueManager : MonoBehaviour
             StateManager._instance.ChangeState(State.MoveToDesk);
         }
         
-        StateManager._instance.SwichIconWindow(false, false);
+        StateManager._instance. SwichIconWindow(false, false);
         BoxCheck._instance.panelMission.SetActive(false);
     }
     public void TurnOnNpcPresentation(bool isOn) {
