@@ -3506,53 +3506,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3578137160107419091, guid: e09820411b8a7d440ba036264422a647, type: 3}
   m_PrefabInstance: {fileID: 7304179482727726640}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1386502084
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1386502086}
-  - component: {fileID: 1386502085}
-  m_Layer: 0
-  m_Name: MouseManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1386502085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386502084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79145369c4d9164aadd2c7a0f5f7525, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particlePrefab: {fileID: 1071842200519485296, guid: 0348e8145fc81a1478e25b983f60c6a5, type: 3}
-  numberOfParticleS: 10
-  mainCamera: {fileID: 114370901}
---- !u!4 &1386502086
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386502084}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.751639, y: -5.1646385, z: -5.526596}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1443652729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4820287315708335532, guid: 50cf28b5363d0a845a984653ff4db3bc, type: 3}
@@ -5340,6 +5293,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5840183903882874077, guid: 4dcc001ea07cf8447839fd653386c2b9, type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6a7455851f6eff64e8a4ba06d60f6187, type: 3}
+    - target: {fileID: 5840183903882874077, guid: 4dcc001ea07cf8447839fd653386c2b9, type: 3}
+      propertyPath: UVModule.sprites.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ea21899740c2da246a20bd0c771bfb0d, type: 3}
     - target: {fileID: 7459175944126720546, guid: 4dcc001ea07cf8447839fd653386c2b9, type: 3}
       propertyPath: emote
       value: 
@@ -5470,6 +5431,14 @@ PrefabInstance:
       propertyPath: npcRenderer
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8245423474502343652, guid: 23729de41cec8fb438e715552e6a28ee, type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6a7455851f6eff64e8a4ba06d60f6187, type: 3}
+    - target: {fileID: 8245423474502343652, guid: 23729de41cec8fb438e715552e6a28ee, type: 3}
+      propertyPath: UVModule.sprites.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ea21899740c2da246a20bd0c771bfb0d, type: 3}
     - target: {fileID: 8486250025960104559, guid: 23729de41cec8fb438e715552e6a28ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.787
@@ -5527,6 +5496,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3390221854071916906, guid: ae8fe493353bbbf489eef2d9cda80f82, type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6a7455851f6eff64e8a4ba06d60f6187, type: 3}
+    - target: {fileID: 3390221854071916906, guid: ae8fe493353bbbf489eef2d9cda80f82, type: 3}
+      propertyPath: UVModule.sprites.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ea21899740c2da246a20bd0c771bfb0d, type: 3}
     - target: {fileID: 3497676732722697806, guid: ae8fe493353bbbf489eef2d9cda80f82, type: 3}
       propertyPath: m_Name
       value: NewNpc
@@ -5620,6 +5597,14 @@ PrefabInstance:
       propertyPath: npcRenderer
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2980286574139660145, guid: 50cf28b5363d0a845a984653ff4db3bc, type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6a7455851f6eff64e8a4ba06d60f6187, type: 3}
+    - target: {fileID: 2980286574139660145, guid: 50cf28b5363d0a845a984653ff4db3bc, type: 3}
+      propertyPath: UVModule.sprites.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ea21899740c2da246a20bd0c771bfb0d, type: 3}
     - target: {fileID: 3118965377918615383, guid: 50cf28b5363d0a845a984653ff4db3bc, type: 3}
       propertyPath: door
       value: 
@@ -6172,4 +6157,3 @@ SceneRoots:
   - {fileID: 880196405837006147}
   - {fileID: 2316859253411568088}
   - {fileID: 4754593072360934978}
-  - {fileID: 1386502086}
