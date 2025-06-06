@@ -37,6 +37,7 @@ public class StateManager : MonoBehaviour {
     private int numberOfTasks_GM;
     private float minQuality_GM;
     private void Awake() {
+        Time.timeScale = 1f;
         _instance = this;
         outlineNpc.SetFloat("_Outline_Thickness", 0.0f);
         outlineNpc.SetColor("_OutlineColor", Color.white);

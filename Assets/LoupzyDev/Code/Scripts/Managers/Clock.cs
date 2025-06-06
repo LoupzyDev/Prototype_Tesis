@@ -28,6 +28,7 @@ public class Clock : MonoBehaviour {
     [SerializeField] private List<Sprite> spritesClock;
     [SerializeField] private List<Color> spritesColor;
 
+    [SerializeField] private List<Color> colorDay;
     private void Awake() {
         _instance = this;
     }
@@ -83,6 +84,7 @@ public class Clock : MonoBehaviour {
         door.GetComponent<Collider>().enabled = true;
         buttonSkipNight.gameObject.SetActive(true);
         GameManager._instance.SetAllNpcsToSleeping();
+        Camera.main.backgroundColor = colorDay[0];
     }
 
     void CambiarADia() {
@@ -93,6 +95,7 @@ public class Clock : MonoBehaviour {
         door.GetComponent<Collider>().enabled = false;
         buttonSkipNight.gameObject.SetActive(false);
         GameManager._instance.SetAllNpcsToWakeUp();
+        Camera.main.backgroundColor = colorDay[1];
     }
 
     void AjustarIntensidadDeLuz() {

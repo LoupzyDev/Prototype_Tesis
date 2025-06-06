@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour {
         UpdateMoneyUI();
         UpdateAllFurniturePrices();
     }
-
 
     public void SetAllNpcsToSleeping() {
         foreach (Npc npcController in npcControllers) {
