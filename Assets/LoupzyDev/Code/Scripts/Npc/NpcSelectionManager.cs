@@ -24,7 +24,6 @@ public class NpcSelectionManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
-
             RaycastHit hit;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
@@ -46,7 +45,7 @@ public class NpcSelectionManager : MonoBehaviour {
             }
         }
         if (Input.GetMouseButtonDown(1) && npcsSelect.Count == 1) {
-
+            AudioManager._instance.PlayAudio(AudioState.MoveNpc);
             RaycastHit hit;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
@@ -102,18 +101,18 @@ public class NpcSelectionManager : MonoBehaviour {
     private void UpdateOutline(GameObject npc, bool isVisible) {
 
         SkinnedMeshRenderer skinnedMeshRenderer = npc.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
-        var outlineMaterial = skinnedMeshRenderer.materials[1];
+        Material outlineMaterial = skinnedMeshRenderer.materials[2];
 
         if (!isTutorial) {
             if (isVisible) {
-                outlineMaterial.SetFloat("_Outline_Thickness", 0.0002f);
+                outlineMaterial.SetFloat("_OutlineWidth", 50f);
             } else {
-                outlineMaterial.SetFloat("_Outline_Thickness", 0f);
+                outlineMaterial.SetFloat("_OutlineWidth", 0f);
             }
         }else {
             outlineMaterial.SetColor("_OutlineColor", Color.green);
             if (isVisible) {
-                outlineMaterial.SetFloat("_Outline_Thickness", 0.0002f);
+                outlineMaterial.SetFloat("_OutlineWidth", 50f);
             } else {
                 outlineMaterial.SetColor("_OutlineColor", Color.red);
             }

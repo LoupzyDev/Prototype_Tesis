@@ -4,73 +4,99 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class CanvasManager : MonoBehaviour {
-    [SerializeField] private GameObject contructionMenu;
+public class CanvasManager : MonoBehaviour
+{
+    public static CanvasManager _instance;
+    [SerializeField] private GameObject constructionMenu;
     [SerializeField] private GameObject pcMenu;
     [SerializeField] private GameObject buttonsGameplay;
-    [SerializeField] private GameObject stadisticsMenu;
+    [SerializeField] private GameObject statisticsMenu;
     [SerializeField] private GameObject taskMenu;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject exitButton;
 
     private bool isPaused = false;
 
-    void Update() {
-        // Detecta si se presiona la tecla Escape
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (isPaused) {
-                turnOffPauseMenu();
-            } else {
-                turnOnPauseMenu();
-            }
-            isPaused = !isPaused; // Alterna el estado de pausa
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePauseMenu();
         }
     }
-
-    public void turnPanels(GameObject panelTrue, GameObject panelFalse) {
-        panelTrue.SetActive(true);
-        panelFalse.SetActive(false);
+    private void TogglePauseMenu()
+    {
+        isPaused = !isPaused;
+        SetPauseState(isPaused);
+    }
+    public void ResumeGame()
+    {
+        isPaused = false;
+        SetPauseState(false);
     }
 
-    public void turnOffContructionMenu() {
-        turnPanels(buttonsGameplay, contructionMenu);
+    private void SetPauseState(bool paused)
+    {
+        pauseMenu.SetActive(paused);
+        Time.timeScale = paused ? 0f : 1f;
+
+        pcMenu.SetActive(paused);
+        taskMenu.SetActive(!paused);
+        statisticsMenu.SetActive(false);
+        exitButton.SetActive(!paused);
+        buttonsGameplay.SetActive(!paused);
+    }   
+
+    private void SwitchPanels(GameObject toEnable, GameObject toDisable)
+    {
+        toEnable.SetActive(true);
+        toDisable.SetActive(false);
     }
 
-    public void turnOnContructionMenu() {
-        turnPanels(contructionMenu, buttonsGameplay);
+    public void ShowConstructionMenu()
+    {
+        SwitchPanels(constructionMenu, buttonsGameplay);
     }
 
-    public void turnOffpcMenu() {
-        turnPanels(buttonsGameplay, pcMenu);
+    public void HideConstructionMenu()
+    {
+        SwitchPanels(buttonsGameplay, constructionMenu);
     }
 
-    public void turnOnpcMenu() {
-        turnPanels(pcMenu, buttonsGameplay);
+    public void ShowPcMenu()
+    {
+        SwitchPanels(pcMenu, buttonsGameplay);
     }
 
-    public void turnOnTaskMenu() {
-        turnPanels(taskMenu, stadisticsMenu);
+    public void HidePcMenu()
+    {
+        SwitchPanels(buttonsGameplay, pcMenu);
     }
 
-    public void turnOnStadisitcsMenu() {
-        turnPanels(stadisticsMenu, taskMenu);
+    public void ShowTaskMenu()
+    {
+        SwitchPanels(taskMenu, statisticsMenu);
     }
 
-    public void turnOnPauseMenu() {
-        pauseMenu.SetActive(true);
-        pcMenu.SetActive(false);
-        Time.timeScale = 0.0f; // Pausa el juego
+    public void ShowStatisticsMenu()
+    {
+        SwitchPanels(statisticsMenu, taskMenu);
     }
 
-    public void turnOffPauseMenu() {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1.0f; // Reanuda el juego
-        buttonsGameplay.SetActive(true);
+    public void ChangeLevel(string levelName)
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(levelName);
     }
-    public void RestartScene() {
-        Time.timeScale = 1.0f; // Asegúrate de reanudar el tiempo antes de reiniciar
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-    public void QuitGame() {
+    public void QuitGame()
+    {
         Application.Quit();
     }
+
 }

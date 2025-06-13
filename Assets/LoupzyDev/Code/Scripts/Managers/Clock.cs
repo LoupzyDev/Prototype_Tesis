@@ -1,8 +1,14 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Clock : MonoBehaviour {
+
+    public static Clock _instance;
+
     public TextMeshProUGUI Reloj;
+    public string actualTime;
     public Light directionalLight;
 
     [SerializeField] private float segundos;
@@ -18,6 +24,14 @@ public class Clock : MonoBehaviour {
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject buttonSkipNight;
 
+    [SerializeField] private Image iconClock;
+    [SerializeField] private List<Sprite> spritesClock;
+    [SerializeField] private List<Color> spritesColor;
+
+    [SerializeField] private List<Color> colorDay;
+    private void Awake() {
+        _instance = this;
+    }
     void Start() {
         GameManager._instance.updateTask(today);
     }
@@ -65,17 +79,23 @@ public class Clock : MonoBehaviour {
 
     void CambiarANoche() {
         isNight = true;
+        iconClock.sprite = spritesClock[1];
+        iconClock.color = spritesColor[1];
         door.GetComponent<Collider>().enabled = true;
         buttonSkipNight.gameObject.SetActive(true);
         GameManager._instance.SetAllNpcsToSleeping();
+        Camera.main.backgroundColor = colorDay[0];
     }
 
     void CambiarADia() {
         isNight = false;
+        iconClock.sprite = spritesClock[0];
+        iconClock.color = spritesColor[0];
         EnableSkipNight(false);
         door.GetComponent<Collider>().enabled = false;
         buttonSkipNight.gameObject.SetActive(false);
         GameManager._instance.SetAllNpcsToWakeUp();
+        Camera.main.backgroundColor = colorDay[1];
     }
 
     void AjustarIntensidadDeLuz() {
@@ -103,8 +123,10 @@ public class Clock : MonoBehaviour {
 
         string periodo = horas < 12 ? "AM" : "PM";
 
-        Reloj.text = AgregarUnCeroAdelanteSiEsNecesario(horas12) + ":"
+        actualTime = AgregarUnCeroAdelanteSiEsNecesario(horas12) + ":"
                    + AgregarUnCeroAdelanteSiEsNecesario(minutos) + " " + periodo;
+
+        Reloj.text = actualTime;
     }
 
     string AgregarUnCeroAdelanteSiEsNecesario(int n) {

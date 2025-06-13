@@ -60,6 +60,10 @@ public class Npc : MonoBehaviour {
     [SerializeField] private Animator animator;
     [SerializeField] private bool isTutorial;
 
+    [Header("Effects")]
+    [Space(10)]
+    [SerializeField] private ParticleSystem npcParticleS;
+
     private void Awake() {
         InitializeNpc();
     }
@@ -124,24 +128,30 @@ public class Npc : MonoBehaviour {
 
         switch (state) {
             case NpcState.None:
+                npcMovement.isFinishTask = false;
+                GetComponent<NpcMovement>().enabled = false;
                 break;
             case NpcState.Playing:
                 _imageState.sprite = _imageSprite[2];
                 break;
             case NpcState.Working:
+                npcMovement.isFinishTask = false;
                 npcMovement.agent.ResetPath();
                 npcMovement.agent.isStopped = true;
                 npcMovement.enabled = false;
                 _imageState.sprite= _imageSprite[0];
-                StartCoroutine(WorkingRoutine()); 
+                StartCoroutine(WorkingRoutine());
+                npcParticleS.Play();
                 break;
             case NpcState.Walking:
+                npcMovement.isFinishTask = true;
                 GetComponent<NpcMovement>().enabled = true;
                 npcMovement.agent.isStopped = false;
                 _imageState.sprite = _imageSprite[1];
                 npcMovement.GoToPosition(npcMovement.initialPosition);
                 break;
             case NpcState.Sleeping:
+                npcMovement.isFinishTask = true;
                 _imageState.sprite = _imageSprite[3];
                 npcMovement.goToDoor();
                 break;
@@ -161,6 +171,8 @@ public class Npc : MonoBehaviour {
             }
             taskData.IsComplete = true; // Marcar como completada
             TaskManager._instance.RemoveCompletedTasks();
+            AudioManager._instance.PlayAudio(AudioState.TaskComplete);
+            npcParticleS.Stop();
             ChangeGameState(NpcState.Walking);
             Debug.Log("Acabé el trabajo en: " + taskData.Name);
         }
@@ -168,6 +180,10 @@ public class Npc : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Work")) {
+            if (stamina <= 0) {
+                Debug.Log("NPC está demasiado cansado para trabajar.");
+                return; 
+            }
             actuallyDesk = collision.gameObject;
             Desk desk = collision.gameObject.GetComponent<Desk>();
 

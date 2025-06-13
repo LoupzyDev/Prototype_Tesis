@@ -16,8 +16,7 @@ public class NpcDisplay : MonoBehaviour {
     [SerializeField] private List<Image> npcBarMorals;
     [SerializeField] private List<Image> npcBarHappiness;
     [SerializeField] private List<TextMeshProUGUI> npcType;
-    [SerializeField] private Color orangeColor;
-    [SerializeField] private Color redColor;
+    [SerializeField] private Gradient colorBar;
 
     
     private void Start() {
@@ -38,10 +37,10 @@ public class NpcDisplay : MonoBehaviour {
     public void UpdateBar(Image bar,float actualValue,float maxValue) {
 
         bar.fillAmount = actualValue/maxValue;
+        bar.color = colorBar.Evaluate(actualValue / maxValue);
     }
     private void UpdateColorNpcs(int i) {
-
-        Renderer npcRenderer = npcList[i].GetComponent<Renderer>();
+        Renderer npcRenderer = npcList[i].GetComponentInChildren<Renderer>();
         Color npcColor = npcRenderer.material.color;
         npcColors[i].color = npcColor;
     }
@@ -49,16 +48,6 @@ public class NpcDisplay : MonoBehaviour {
     private void UpdateNamesNpcs(int i) {
 
         npcNames[i].text = npcList[i].name;
-    }
-    private void CheckAndChangeBarColor(Image bar, float currentValue) {
-        if (currentValue < 50) {
-            bar.color = redColor;
-        }
-        else if (currentValue < 75 && currentValue > 50 ){
-            bar.color = orangeColor;
-        } else {
-            bar.color = Color.green; 
-        }
     }
     private void UpdateAllBars(int i) {
 
@@ -71,11 +60,6 @@ public class NpcDisplay : MonoBehaviour {
         UpdateBar(npcBarStamins[i], staminaActualValue, 100);
         UpdateBar(npcBarMorals[i], moralActualValue, 100);
         UpdateBar(npcBarHappiness[i], happinessActualValue, 100);
-
-        CheckAndChangeBarColor(npcBarHps[i], hpActualValue);
-        CheckAndChangeBarColor(npcBarStamins[i], staminaActualValue);
-        CheckAndChangeBarColor(npcBarMorals[i], moralActualValue);
-        CheckAndChangeBarColor(npcBarHappiness[i], happinessActualValue);
     }
 
 }

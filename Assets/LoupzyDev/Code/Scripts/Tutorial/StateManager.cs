@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum State {
     None,
@@ -19,12 +21,13 @@ public class StateManager : MonoBehaviour {
     private State currentState = State.None;
     private int returnIndex;
     [SerializeField] private Material outlineNpc;
+    [SerializeField] private Material outlineTable;
     [SerializeField] private Material outlineDesk;
     [SerializeField] private GameObject selectionManager;
     [SerializeField] private GameObject box;
     [SerializeField] private GameObject buttonWindow;
-    [SerializeField] private GameObject iconsAlert;
-
+    [SerializeField] private Image iconsAlert;
+    [SerializeField] private List<Color> colorAlerts;
 
     [SerializeField] private DaySO daysDataSO;
     [SerializeField] private DayData currentDay;
@@ -34,16 +37,23 @@ public class StateManager : MonoBehaviour {
     private int numberOfTasks_GM;
     private float minQuality_GM;
     private void Awake() {
+        Time.timeScale = 1f;
         _instance = this;
-        returnIndex = 0;
         outlineNpc.SetFloat("_Outline_Thickness", 0.0f);
         outlineNpc.SetColor("_OutlineColor", Color.white);
     }
     void Start() {
+        returnIndex = 0;
         ChangeState(State.ShowDialogue);
     }
 
     void Update() {
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            changeAnotherScene();
+        }
+
         if (Input.GetMouseButtonDown(0) && currentState == State.ShowDialogue) {
             ChangeState(State.ClickNpc);
         } else if (Input.GetMouseButtonDown(0) && currentState == State.ClickNpc && returnIndex == 0) {
@@ -63,7 +73,6 @@ public class StateManager : MonoBehaviour {
             outlineNpc.SetColor("_OutlineColor", Color.white);
             ChangeState(State.OpenWindows);
         } else if (npc.GetComponent<NpcMovement>().enabled && currentState == State.MoveToDesk && returnIndex == 0) {
-            SwitchMaterial._instance.isSwitched = true;
             DialogueManager._instance.deskImage.gameObject.SetActive(true);
         } else if (desk.GetComponent<Desk>().IsOccupied() && currentState == State.MoveToDesk && returnIndex == 0) {
             DialogueManager._instance.TurnOffOnTextPanel(false, false, false);
@@ -80,7 +89,6 @@ public class StateManager : MonoBehaviour {
             ChangeState(State.TaskComplete);
         } else if (currentState == State.TaskComplete && returnIndex == 1) {
             npc.GetComponent<NpcMovement>().enabled = false;
-            SwitchMaterial._instance.isSwitched = false;
             returnIndex++;
         } else if (currentState == State.TaskComplete && returnIndex == 2 && remainingNps[0].GetComponent<NpcMovement>().agent.hasPath==false) {
             DialogueManager._instance.TurnOnNpcPresentation(true);
@@ -120,17 +128,19 @@ public class StateManager : MonoBehaviour {
                 DialogueManager._instance.UpdateNpcDialogue(1);
                 updateTask(0);
                 buttonWindow.SetActive(true);
-                iconsAlert.SetActive(true);
+                iconsAlert.color = colorAlerts[0];
                 break;
 
             case State.MoveToDesk:
                 DialogueManager._instance.TurnOffOnTextPanel(false, false, true);
+                outlineTable.SetFloat("_OutlineWidth", 50f);
                 DialogueManager._instance.UpdateIcon(0);
                 break;
 
             case State.TaskComplete:
                 foreach (var npc in remainingNps) {
                     npc.gameObject.SetActive(true);
+                    outlineTable.SetFloat("_OutlineWidth", 0f);
                     NpcSelectionManager._instance.npcsSelect.Add(npc.gameObject);
                     npc.GetComponent<Npc>().state = NpcState.Walking;
                 }
@@ -149,7 +159,14 @@ public class StateManager : MonoBehaviour {
 
     public void SwichIconWindow(bool button, bool icons) {
         buttonWindow.SetActive(button);
-        iconsAlert.SetActive(icons);
+        if(icons) {
+            iconsAlert.color = colorAlerts[0];
+        } else {
+            iconsAlert.color = colorAlerts[1];
+        }
     }
 
+    public void changeAnotherScene() {
+        SceneManager.LoadScene("Level_1");
+    }
 }

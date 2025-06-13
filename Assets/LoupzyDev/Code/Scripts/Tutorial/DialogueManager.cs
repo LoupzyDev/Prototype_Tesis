@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager _instance;
     [SerializeField] private List<Sprite> mouseSprites;
     [SerializeField] private List<GameObject> npcPresentations;
+    [SerializeField] private List<GameObject> npcPanelIcon;
 
     [SerializeField] private List<string> narrativeList;
     [SerializeField] private List<string> npcDialogueList;
@@ -23,6 +24,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private GameObject windowsPanel;
     public GameObject exitButton;
+    public GameObject buttonNextScene;
     private void Awake() {
         _instance = this;
     }
@@ -51,12 +53,17 @@ public class DialogueManager : MonoBehaviour
             StateManager._instance.ChangeState(State.MoveToDesk);
         }
         
-        StateManager._instance.SwichIconWindow(false, false);
+        StateManager._instance. SwichIconWindow(false, false);
         BoxCheck._instance.panelMission.SetActive(false);
     }
     public void TurnOnNpcPresentation(bool isOn) {
         foreach (var npcP in npcPresentations) {
             npcP.gameObject.SetActive(isOn);
+            buttonNextScene.SetActive(isOn);
+        }
+        foreach (var npcP in npcPanelIcon)
+        {
+            npcP.gameObject.SetActive(!isOn);
         }
     }
 }
